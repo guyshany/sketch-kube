@@ -5,11 +5,11 @@ import { AnimatedBox } from "./AnimatedBox";
 
 export function WhyOrchestration() {
   const problems = [
-    { icon: "📈", label: "Scale up/down", delay: 0.3 },
-    { icon: "🔄", label: "Auto-restart", delay: 0.5 },
-    { icon: "❤️‍🩹", label: "Health checks", delay: 0.7 },
-    { icon: "⚖️", label: "Load balance", delay: 0.9 },
-    { icon: "🚀", label: "Zero-downtime", delay: 1.1 },
+    { icon: "SCL", label: "Scale up/down", delay: 0.3 },
+    { icon: "RST", label: "Auto-restart", delay: 0.5 },
+    { icon: "HLT", label: "Health checks", delay: 0.7 },
+    { icon: "LB", label: "Load balance", delay: 0.9 },
+    { icon: "ZDT", label: "Zero-downtime", delay: 1.1 },
   ];
 
   return (
@@ -27,7 +27,7 @@ export function WhyOrchestration() {
             transition={{ delay: p.delay, type: "spring", damping: 15 }}
             className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-zinc-700 bg-zinc-800/50"
           >
-            <span className="text-sm">{p.icon}</span>
+            <span className="text-[10px] font-mono font-bold tracking-tight text-indigo-400">{p.icon}</span>
             <span className="text-[10px] text-zinc-300 font-medium">{p.label}</span>
           </motion.div>
         ))}
@@ -56,7 +56,7 @@ export function LoadBalancerDiagram() {
         label="Users"
         color="border-zinc-600 bg-zinc-800/80 text-zinc-300"
         delay={0.1}
-        icon={<span className="text-sm">👥</span>}
+        icon={<span className="text-[10px] font-mono font-bold tracking-tight text-zinc-400">USR</span>}
       />
 
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
@@ -74,7 +74,7 @@ export function LoadBalancerDiagram() {
         sublabel="round-robin"
         color="border-indigo-500/30 bg-indigo-500/10 text-indigo-400"
         delay={0.5}
-        icon={<span className="text-sm">⚖️</span>}
+        icon={<span className="text-[10px] font-mono font-bold tracking-tight text-indigo-400">LB</span>}
       />
 
       <motion.div
@@ -120,7 +120,7 @@ export function HealthCheckDiagram() {
         transition={{ delay: 0.2, type: "spring" }}
         className="flex flex-col items-center gap-1.5 px-4 py-3 rounded-lg border border-zinc-700 bg-zinc-800/50"
       >
-        <span className="text-sm">🩺</span>
+        <span className="text-[10px] font-mono font-bold tracking-tight text-emerald-400">CHK</span>
         <span className="text-[10px] text-zinc-300 font-medium">Health Check</span>
         <motion.span
           className="font-mono text-[9px] text-zinc-500"
@@ -167,9 +167,9 @@ export function HealthCheckDiagram() {
             <motion.span
               animate={{ rotate: 360 }}
               transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              className="text-xs"
+              className="text-[10px] font-mono font-bold tracking-tight text-red-400"
             >
-              🔄
+              RST
             </motion.span>
           </div>
         </motion.div>

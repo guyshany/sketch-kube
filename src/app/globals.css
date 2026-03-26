@@ -70,9 +70,44 @@ body {
 }
 
 .react-flow__node {
-  cursor: grab;
+  cursor: pointer;
 }
 
-.react-flow__node:active {
-  cursor: grabbing;
+.react-flow__minimap {
+  display: none !important;
+}
+
+/* Reduced motion: disable all CSS and SVG animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  svg animateMotion,
+  svg animate {
+    dur: 0.01ms;
+  }
+}
+
+/* Focus-visible ring for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+button:focus-visible,
+a:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
 }

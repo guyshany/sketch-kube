@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 
 export function IaCIntroDiagram() {
   const benefits = [
-    { icon: "📝", label: "Version controlled", delay: 0.2 },
-    { icon: "🔄", label: "Reproducible", delay: 0.4 },
-    { icon: "👀", label: "Reviewable (PRs)", delay: 0.6 },
-    { icon: "🧪", label: "Testable", delay: 0.8 },
-    { icon: "🤖", label: "Automated (CI/CD)", delay: 1.0 },
+    { icon: "VCS", label: "Version controlled", delay: 0.2 },
+    { icon: "RPT", label: "Reproducible", delay: 0.4 },
+    { icon: "REV", label: "Reviewable (PRs)", delay: 0.6 },
+    { icon: "TST", label: "Testable", delay: 0.8 },
+    { icon: "CIC", label: "Automated (CI/CD)", delay: 1.0 },
   ];
 
   return (
@@ -24,7 +24,7 @@ export function IaCIntroDiagram() {
           transition={{ delay: 0.1 }}
           className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg border border-red-500/30 bg-red-500/5"
         >
-          <span className="text-sm">🖱️</span>
+          <span className="text-[10px] font-mono font-bold tracking-tight text-red-400">CLK</span>
           <span className="text-[10px] text-red-400 line-through">Click-ops</span>
         </motion.div>
 
@@ -43,7 +43,7 @@ export function IaCIntroDiagram() {
           transition={{ delay: 0.4 }}
           className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg border border-emerald-500/30 bg-emerald-500/5"
         >
-          <span className="text-sm">💻</span>
+          <span className="text-[10px] font-mono font-bold tracking-tight text-emerald-400">PC</span>
           <span className="text-[10px] text-emerald-400 font-semibold">Code</span>
         </motion.div>
       </div>
@@ -57,7 +57,7 @@ export function IaCIntroDiagram() {
             transition={{ delay: b.delay, type: "spring", damping: 12 }}
             className="flex items-center gap-1 px-2 py-1 rounded bg-zinc-800 border border-zinc-700 text-[9px] text-zinc-300"
           >
-            <span>{b.icon}</span>
+            <span className="font-mono font-bold tracking-tight text-violet-400">{b.icon}</span>
             <span>{b.label}</span>
           </motion.div>
         ))}
@@ -136,8 +136,8 @@ export function StackProviderDiagram() {
 
       <div className="flex gap-3">
         {[
-          { name: "kubernetes", icon: "☸️", color: "border-blue-500/30 bg-blue-500/5 text-blue-400", delay: 0.7 },
-          { name: "aws", icon: "☁️", color: "border-amber-500/30 bg-amber-500/5 text-amber-400", delay: 0.9 },
+          { name: "kubernetes", icon: "K8S", color: "border-blue-500/30 bg-blue-500/5 text-blue-400", delay: 0.7 },
+          { name: "aws", icon: "CLD", color: "border-amber-500/30 bg-amber-500/5 text-amber-400", delay: 0.9 },
         ].map((p) => (
           <motion.div
             key={p.name}
@@ -146,7 +146,7 @@ export function StackProviderDiagram() {
             transition={{ delay: p.delay, type: "spring" }}
             className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg border ${p.color}`}
           >
-            <span className="text-sm">{p.icon}</span>
+            <span className="text-[10px] font-mono font-bold tracking-tight">{p.icon}</span>
             <span className="text-[10px] font-medium">{p.name}</span>
           </motion.div>
         ))}

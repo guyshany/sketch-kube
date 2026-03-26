@@ -97,14 +97,14 @@ Now let's practice! In the challenge, you'll build a command pipeline on the can
           name: "Command pipeline connected",
           description: "Terminal connects to ls command, which connects to grep",
           entryPoint: "terminal",
-          expectedPath: ["terminal", "command"],
+          expectedPath: ["terminal", "command", "command"],
           validations: [
             {
               nodeType: "command",
               field: "command",
               operator: "exists",
               value: true,
-              message: "The Command must have a command specified (e.g., 'ls' or 'grep').",
+              message: "Each Command must have a command specified (e.g., 'ls' or 'grep').",
             },
           ],
           successMessage: "Pipeline is connected and working!",

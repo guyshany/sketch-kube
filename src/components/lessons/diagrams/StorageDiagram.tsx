@@ -61,7 +61,7 @@ export function ConfigMapDiagram() {
         transition={{ delay: 1.2, type: "spring" }}
         className="px-4 py-3 rounded-xl border border-indigo-500/30 bg-indigo-500/5 flex flex-col items-center gap-1"
       >
-        <span className="text-sm">📦</span>
+        <span className="text-[10px] font-mono font-bold tracking-tight text-indigo-400">PKG</span>
         <span className="text-[10px] text-indigo-400 font-medium">Pod</span>
         <span className="text-[9px] text-zinc-600">env vars</span>
       </motion.div>
@@ -125,7 +125,9 @@ export function SecretDiagram() {
           transition={{ delay: 0.9 }}
           className="mt-2 text-center"
         >
-          <span className="text-[8px] text-red-400">🔒 base64 encoded</span>
+          <span className="text-[8px] text-red-400">
+            <span className="font-mono font-bold tracking-tight">KEY</span> base64 encoded
+          </span>
         </motion.div>
       </motion.div>
     </motion.div>

@@ -39,7 +39,7 @@ export function HelmProblemDiagram() {
         className="flex items-center justify-center"
       >
         <div className="flex items-center gap-2 px-4 py-2 rounded-lg border border-indigo-500/30 bg-indigo-500/5">
-          <span className="text-sm">📦</span>
+          <span className="text-[10px] font-mono font-bold tracking-tight text-indigo-300">PKG</span>
           <span className="text-xs text-indigo-400 font-semibold">Helm Chart bundles them all</span>
         </div>
       </motion.div>
@@ -82,7 +82,16 @@ export function ChartStructureDiagram() {
             style={{ paddingLeft: f.indent * 16 }}
           >
             <span className={`${colors[f.type]} ${f.type === "dir" ? "font-semibold" : ""}`}>
-              {f.type === "dir" ? "📁 " : "📄 "}{f.name}
+              {f.type === "dir" ? (
+                <>
+                  <span className="font-mono font-bold text-blue-300">DIR</span>{" "}
+                </>
+              ) : (
+                <>
+                  <span className="font-mono font-bold text-zinc-400">DOC</span>{" "}
+                </>
+              )}
+              {f.name}
             </span>
           </motion.div>
         ))}

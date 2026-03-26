@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import { useReactFlow } from "@xyflow/react";
 import { Play, RotateCcw, CheckCircle2, XCircle, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCanvasStore } from "@/lib/store/canvas-store";
@@ -8,6 +9,7 @@ import { useLessonStore } from "@/lib/store/lesson-store";
 import { useProgressStore } from "@/lib/store/progress-store";
 import { runAllTests, type TestResult } from "@/lib/engine/validator";
 import { buildSimulationSteps, runSimulation } from "@/lib/engine/simulator";
+import { useAchievements } from "@/lib/hooks/use-achievements";
 import CompletionModal from "./CompletionModal";
 import type { Challenge } from "@/types/stages";
 
@@ -31,6 +33,8 @@ export default function SimulationRunner({ challenge, stageId }: SimulationRunne
 
   const hintsRevealed = useLessonStore((s) => s.hintsRevealed);
   const completeChallenge = useProgressStore((s) => s.completeChallenge);
+  const { onChallengeCompleted } = useAchievements();
+  const { fitView } = useReactFlow();
 
   const handleTest = useCallback(async () => {
     if (running) return;
@@ -64,17 +68,25 @@ export default function SimulationRunner({ challenge, stageId }: SimulationRunne
     setRunning(false);
 
     const allPassed = testResults.every((r) => r.passed);
+    if (!allPassed) {
+      const failedResult = testResults.find((r) => !r.passed);
+      const failedNodeId = failedResult?.results.find((r) => !r.passed)?.nodeId;
+      if (failedNodeId) {
+        fitView({ nodes: [{ id: failedNodeId }], duration: 500, padding: 0.5 });
+      }
+    }
     if (allPassed) {
       const starReduction = Math.min(hintsRevealed, challenge.maxStars - 1);
       const stars = Math.max(1, challenge.maxStars - starReduction);
       completeChallenge(stageId, challenge.id, stars, hintsRevealed);
+      onChallengeCompleted(stageId, hintsRevealed, stars, challenge.maxStars);
       setEarnedStars(stars);
       setTimeout(() => setShowCompletion(true), 600);
     }
   }, [
     running, nodes, edges, challenge, stageId, hintsRevealed,
     setNodeStatus, resetNodeStatuses, setSimulationRunning,
-    setEdges, completeChallenge,
+    setEdges, completeChallenge, onChallengeCompleted,
   ]);
 
   const handleReset = useCallback(() => {
@@ -101,7 +113,7 @@ export default function SimulationRunner({ challenge, stageId }: SimulationRunne
             "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all",
             running
               ? "bg-zinc-700 text-zinc-400 cursor-not-allowed"
-              : "bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/20",
+              : "bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/20 cursor-pointer",
           )}
         >
           {running ? (

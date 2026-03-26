@@ -81,7 +81,7 @@ export function PodDiagram() {
             transition={{ delay: 0.5 }}
             className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg border border-cyan-500/30 bg-cyan-500/5"
           >
-            <span className="text-sm">📦</span>
+            <span className="text-[10px] font-mono font-bold tracking-tight text-cyan-400">PKG</span>
             <span className="text-[10px] text-cyan-400">nginx</span>
             <span className="text-[9px] text-zinc-600">:80</span>
           </motion.div>
@@ -91,7 +91,7 @@ export function PodDiagram() {
             transition={{ delay: 0.7 }}
             className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg border border-amber-500/30 bg-amber-500/5"
           >
-            <span className="text-sm">📦</span>
+            <span className="text-[10px] font-mono font-bold tracking-tight text-amber-400">PKG</span>
             <span className="text-[10px] text-amber-400">log-agent</span>
             <span className="text-[9px] text-zinc-600">sidecar</span>
           </motion.div>
@@ -170,7 +170,7 @@ export function ServiceDiagram() {
         label="Traffic"
         color="border-zinc-600 bg-zinc-800/80 text-zinc-300"
         delay={0.1}
-        icon={<span className="text-sm">🌐</span>}
+        icon={<span className="text-[10px] font-mono font-bold tracking-tight text-sky-400">WEB</span>}
       />
 
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>

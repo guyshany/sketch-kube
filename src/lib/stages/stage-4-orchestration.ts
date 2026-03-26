@@ -104,10 +104,10 @@ In the challenge, you'll build a scaled setup with a load balancer and health ch
           validations: [
             {
               nodeType: "container",
-              field: "name",
+              field: "image",
               operator: "exists",
               value: true,
-              message: "Container needs a name.",
+              message: "Container must reference an image (e.g., 'nginx:latest').",
             },
           ],
           successMessage: "Traffic flows from load balancer to container!",
@@ -132,7 +132,7 @@ In the challenge, you'll build a scaled setup with a load balancer and health ch
       ],
       hints: [
         "Add a Load Balancer and choose an algorithm like 'round-robin'.",
-        "Add a Container with a name and image, then connect Load Balancer → Container.",
+        "Add a Container with an image (e.g., 'nginx:latest'), then connect Load Balancer → Container.",
         "Add a Health Check with a path like '/health', then connect Container → Health Check.",
       ],
       maxStars: 3,

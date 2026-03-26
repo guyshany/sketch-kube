@@ -54,9 +54,8 @@ export const componentRegistry: Record<string, ComponentDefinition> = {
     description: "A Docker container running an image",
     icon: "Box",
     category: "docker",
-    defaultConfig: { name: "", image: "", port: 80, env: "" },
+    defaultConfig: { image: "", port: 80, env: "" },
     configFields: [
-      { key: "name", label: "Container Name", type: "text", placeholder: "my-app", required: true },
       { key: "image", label: "Image", type: "text", placeholder: "nginx:latest", required: true },
       { key: "port", label: "Container Port", type: "number" },
       { key: "env", label: "Environment", type: "textarea", placeholder: "KEY=value" },
@@ -68,9 +67,8 @@ export const componentRegistry: Record<string, ComponentDefinition> = {
     description: "A Docker image",
     icon: "Layers",
     category: "docker",
-    defaultConfig: { name: "", tag: "latest", registry: "docker.io" },
+    defaultConfig: { tag: "latest", registry: "docker.io" },
     configFields: [
-      { key: "name", label: "Image Name", type: "text", placeholder: "nginx", required: true },
       { key: "tag", label: "Tag", type: "text", placeholder: "latest" },
       { key: "registry", label: "Registry", type: "text", placeholder: "docker.io" },
     ],

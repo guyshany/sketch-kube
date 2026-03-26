@@ -114,20 +114,33 @@ export function runTestCase(
     };
   }
 
+  const pathNodeIds: string[] = [];
+
   if (testCase.expectedPath.length > 0) {
-    const pathNodeIds: string[] = [];
+    const usedIds = new Set<string>();
+
     for (const expectedType of testCase.expectedPath) {
       const found = nodes.find(
-        (n) => n.data.componentType === expectedType || n.id === expectedType,
+        (n) =>
+          (n.data.componentType === expectedType || n.id === expectedType) &&
+          !usedIds.has(n.id),
       );
       if (!found) {
+        const alreadyUsed = nodes.some(
+          (n) =>
+            (n.data.componentType === expectedType || n.id === expectedType) &&
+            usedIds.has(n.id),
+        );
         results.push({
           passed: false,
-          message: `Required component "${expectedType}" is missing from the canvas.`,
+          message: alreadyUsed
+            ? `Add another "${expectedType}" component — the existing one is already used in this path.`
+            : `Required component "${expectedType}" is missing from the canvas.`,
         });
         return { testCase, passed: false, results, path: [] };
       }
       pathNodeIds.push(found.id);
+      usedIds.add(found.id);
     }
 
     for (let i = 0; i < pathNodeIds.length - 1; i++) {
@@ -147,10 +160,15 @@ export function runTestCase(
     }
   }
 
+  const pathNodeSet = new Set(pathNodeIds);
   for (const validation of testCase.validations) {
-    const target = nodes.find(
-      (n) => n.data.componentType === validation.nodeType,
-    );
+    const target =
+      pathNodeIds
+        .map((id) => nodeMap.get(id))
+        .find((n) => n && n.data.componentType === validation.nodeType) ??
+      (pathNodeSet.size === 0
+        ? nodes.find((n) => n.data.componentType === validation.nodeType)
+        : undefined);
     if (!target) {
       results.push({
         passed: false,
@@ -162,15 +180,12 @@ export function runTestCase(
   }
 
   const allPassed = results.every((r) => r.passed);
-  const resolvedPath = testCase.expectedPath
-    .map((t) => nodes.find((n) => n.data.componentType === t || n.id === t)?.id)
-    .filter(Boolean) as string[];
 
   return {
     testCase,
     passed: allPassed,
     results,
-    path: resolvedPath,
+    path: pathNodeIds,
   };
 }
 

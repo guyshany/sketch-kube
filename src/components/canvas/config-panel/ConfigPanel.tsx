@@ -2,15 +2,18 @@
 
 import { useCanvasStore } from "@/lib/store/canvas-store";
 import { componentRegistry } from "@/lib/components-registry";
-import { X } from "lucide-react";
+import { X, Trash2 } from "lucide-react";
 import type { ConfigField } from "@/types/nodes";
 
 export default function ConfigPanel() {
   const selectedNodeId = useCanvasStore((s) => s.selectedNodeId);
   const nodes = useCanvasStore((s) => s.nodes);
+  const edges = useCanvasStore((s) => s.edges);
   const updateNodeConfig = useCanvasStore((s) => s.updateNodeConfig);
   const updateNodeData = useCanvasStore((s) => s.updateNodeData);
   const setSelectedNodeId = useCanvasStore((s) => s.setSelectedNodeId);
+  const setNodes = useCanvasStore((s) => s.setNodes);
+  const setEdges = useCanvasStore((s) => s.setEdges);
 
   const node = nodes.find((n) => n.id === selectedNodeId);
   if (!node) return null;
@@ -85,10 +88,18 @@ export default function ConfigPanel() {
         </div>
       </div>
 
-      <div className="px-3 py-2 border-t border-zinc-800">
-        <div className="text-[10px] text-zinc-600 font-mono">
-          ID: {node.id}
-        </div>
+      <div className="px-3 py-2 border-t border-zinc-800 space-y-2">
+        <button
+          onClick={() => {
+            setNodes(nodes.filter((n) => n.id !== node.id));
+            setEdges(edges.filter((e) => e.source !== node.id && e.target !== node.id));
+            setSelectedNodeId(null);
+          }}
+          className="w-full flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-md text-xs text-red-400 hover:bg-red-500/10 border border-red-500/20 hover:border-red-500/40 transition-colors"
+        >
+          <Trash2 className="w-3 h-3" />
+          Delete Component
+        </button>
       </div>
     </div>
   );

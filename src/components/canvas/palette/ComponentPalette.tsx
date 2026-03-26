@@ -6,6 +6,7 @@ import { componentRegistry, categoryLabels } from "@/lib/components-registry";
 import type { ComponentType, SketchNodeData } from "@/types/nodes";
 import type { Node } from "@xyflow/react";
 import { useCanvasStore } from "@/lib/store/canvas-store";
+import { useAchievements } from "@/lib/hooks/use-achievements";
 import {
   Terminal, Code, Cpu, Plug, Box, Layers, HardDrive,
   Hexagon, GitBranch, Globe, ArrowRightLeft, FileText,
@@ -27,6 +28,7 @@ interface ComponentPaletteProps {
 export default function ComponentPalette({ availableComponents }: ComponentPaletteProps) {
   const addNode = useCanvasStore((s) => s.addNode);
   const nodes = useCanvasStore((s) => s.nodes);
+  const { onNodeAdded } = useAchievements();
 
   const grouped = availableComponents.reduce<Record<string, ComponentType[]>>(
     (acc, type) => {
@@ -45,8 +47,8 @@ export default function ComponentPalette({ availableComponents }: ComponentPalet
       const def = componentRegistry[componentType];
       if (!def) return;
       const id = `${componentType}-${Date.now()}`;
-      const xOffset = (nodes.length % 4) * 200 + 100;
-      const yOffset = Math.floor(nodes.length / 4) * 120 + 100;
+      const xOffset = (nodes.length % 4) * 160 + 80;
+      const yOffset = Math.floor(nodes.length / 4) * 80 + 60;
       const node: Node<SketchNodeData> = {
         id,
         type: "sketchNode",
@@ -59,8 +61,9 @@ export default function ComponentPalette({ availableComponents }: ComponentPalet
         },
       };
       addNode(node);
+      onNodeAdded();
     },
-    [addNode, nodes.length],
+    [addNode, nodes.length, onNodeAdded],
   );
 
   return (
@@ -89,7 +92,7 @@ export default function ComponentPalette({ availableComponents }: ComponentPalet
                     onClick={() => handleAdd(type)}
                     className={cn(
                       "w-full flex items-center gap-2 px-2 py-1.5 rounded-md text-left",
-                      "hover:bg-zinc-800 transition-colors group cursor-grab active:cursor-grabbing",
+                      "hover:bg-zinc-800 transition-colors group cursor-pointer",
                       "text-zinc-400 hover:text-zinc-200",
                     )}
                     title={def.description}

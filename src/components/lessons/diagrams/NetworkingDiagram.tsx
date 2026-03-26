@@ -67,7 +67,7 @@ export function IngressDiagram() {
         transition={{ delay: 0.2 }}
         className="px-3 py-1.5 rounded-lg border border-zinc-600 bg-zinc-800/80 text-[10px] text-zinc-300"
       >
-        🌐 Internet
+        <span className="font-mono font-bold tracking-tight text-sky-400">WEB</span> Internet
       </motion.div>
 
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
@@ -151,10 +151,10 @@ export function IngressDiagram() {
 
 export function FullStackDiagram() {
   const layers = [
-    { label: "Internet", icon: "🌐", color: "border-zinc-600 bg-zinc-800/80 text-zinc-300", delay: 0.1 },
-    { label: "Ingress", icon: "🚪", color: "border-violet-500/30 bg-violet-500/5 text-violet-400", delay: 0.4 },
-    { label: "Service", icon: "🔗", color: "border-emerald-500/30 bg-emerald-500/5 text-emerald-400", delay: 0.7 },
-    { label: "Deployment → Pods", icon: "📦", color: "border-indigo-500/30 bg-indigo-500/5 text-indigo-400", delay: 1.0 },
+    { label: "Internet", icon: "WEB", color: "border-zinc-600 bg-zinc-800/80 text-zinc-300", delay: 0.1 },
+    { label: "Ingress", icon: "ING", color: "border-violet-500/30 bg-violet-500/5 text-violet-400", delay: 0.4 },
+    { label: "Service", icon: "SVC", color: "border-emerald-500/30 bg-emerald-500/5 text-emerald-400", delay: 0.7 },
+    { label: "Deployment → Pods", icon: "PKG", color: "border-indigo-500/30 bg-indigo-500/5 text-indigo-400", delay: 1.0 },
   ];
 
   return (
@@ -171,7 +171,7 @@ export function FullStackDiagram() {
             transition={{ delay: layer.delay, type: "spring", damping: 15 }}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg border ${layer.color}`}
           >
-            <span className="text-sm">{layer.icon}</span>
+            <span className="text-[10px] font-mono font-bold tracking-tight opacity-90">{layer.icon}</span>
             <span className="text-[10px] font-medium">{layer.label}</span>
           </motion.div>
           {i < layers.length - 1 && (

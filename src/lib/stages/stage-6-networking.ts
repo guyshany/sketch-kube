@@ -76,7 +76,7 @@ Let's build this!`,
       title: "Expose an App via Ingress",
       description:
         "Build a full networking stack: Create a Deployment, expose it via a Service, and add an Ingress to route external HTTP traffic. Configure the Ingress with a host and path that point to your Service.",
-      availableComponents: ["deployment", "service", "ingress", "port"],
+      availableComponents: ["deployment", "service", "ingress"],
       testCases: [
         {
           id: "test-6-1",

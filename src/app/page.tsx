@@ -5,10 +5,12 @@ import { cn } from "@/lib/utils";
 import { stages } from "@/lib/stages";
 import { useProgressStore } from "@/lib/store/progress-store";
 import TopBar from "@/components/layout/TopBar";
+import Logo from "@/components/layout/Logo";
 import ProgressBar from "@/components/progress/ProgressBar";
 import {
   Terminal, Cpu, Box, Network, Hexagon, Globe,
   Database, Package, Blocks, Lock, Check, Star,
+  ArrowRight,
 } from "lucide-react";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -46,6 +48,9 @@ export default function HomePage() {
 
       <main className="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
         <div className="text-center mb-12">
+          <div className="flex justify-center mb-5">
+            <Logo size={72} />
+          </div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 mb-4">
             <span className="text-xs text-indigo-400 font-medium">Interactive Learning Platform</span>
           </div>
@@ -72,6 +77,23 @@ export default function HomePage() {
             </div>
           </div>
           <ProgressBar current={completedStages} total={stages.length} />
+          {(() => {
+            const nextStage = stages.find(
+              (s) =>
+                !isStageCompleted(s.id) &&
+                isStageUnlocked(s.id, s.unlockedBy),
+            );
+            if (!nextStage) return null;
+            return (
+              <Link
+                href={`/stage/${nextStage.id}`}
+                className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium bg-indigo-600 hover:bg-indigo-500 text-white transition-colors shadow-lg shadow-indigo-600/20"
+              >
+                {completedStages === 0 ? "Start Learning" : "Continue"}
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            );
+          })()}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

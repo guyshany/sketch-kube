@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { ArrowLeft, Star } from "lucide-react";
 import { useProgressStore } from "@/lib/store/progress-store";
+import Logo from "@/components/layout/Logo";
+import AchievementsPanel from "@/components/achievements/AchievementsPanel";
 import type { Stage } from "@/types/stages";
 
 interface TopBarProps {
@@ -25,9 +27,7 @@ export default function TopBar({ stage }: TopBarProps) {
           </Link>
         ) : null}
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-md bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-            <span className="text-[10px] font-bold text-white">SK</span>
-          </div>
+          <Logo size={28} />
           <span className="text-sm font-semibold text-zinc-200">
             SketchKube
           </span>
@@ -43,11 +43,14 @@ export default function TopBar({ stage }: TopBarProps) {
         </div>
       )}
 
-      <div className="flex items-center gap-2">
-        <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-        <span className="text-xs font-medium text-amber-400 tabular-nums">
-          {totalStars}
-        </span>
+      <div className="flex items-center gap-4">
+        <AchievementsPanel />
+        <div className="flex items-center gap-1.5">
+          <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+          <span className="text-xs font-medium text-amber-400 tabular-nums">
+            {totalStars}
+          </span>
+        </div>
       </div>
     </header>
   );

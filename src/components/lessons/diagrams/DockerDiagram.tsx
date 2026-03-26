@@ -18,7 +18,7 @@ export function WorksOnMyMachine() {
           className="flex flex-col items-center gap-2"
         >
           <div className="w-16 h-12 rounded-lg border border-emerald-500/30 bg-emerald-500/5 flex items-center justify-center">
-            <span className="text-lg">💻</span>
+            <span className="text-sm font-mono font-bold tracking-tight text-emerald-400">PC</span>
           </div>
           <span className="text-[10px] text-zinc-400">Your Laptop</span>
           <div className="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
@@ -42,7 +42,7 @@ export function WorksOnMyMachine() {
           className="flex flex-col items-center gap-2"
         >
           <div className="w-16 h-12 rounded-lg border border-red-500/30 bg-red-500/5 flex items-center justify-center">
-            <span className="text-lg">🖥️</span>
+            <span className="text-sm font-mono font-bold tracking-tight text-red-400">SRV</span>
           </div>
           <span className="text-[10px] text-zinc-400">Production</span>
           <div className="px-2 py-0.5 rounded bg-red-500/10 border border-red-500/20">
@@ -113,7 +113,7 @@ export function DockerImageDiagram() {
           className="flex flex-col items-center gap-2"
         >
           <div className="w-20 h-20 rounded-xl border-2 border-cyan-500/30 bg-cyan-500/5 flex flex-col items-center justify-center">
-            <span className="text-2xl">📦</span>
+            <span className="text-lg font-mono font-bold tracking-tight text-cyan-400">PKG</span>
             <span className="text-[10px] text-cyan-400 font-medium mt-0.5">Image</span>
           </div>
           <span className="text-[10px] text-zinc-500 font-mono">myapp:v1.0</span>
@@ -138,7 +138,7 @@ export function ContainerDiagram() {
           className="flex flex-col items-center gap-1"
         >
           <div className="w-16 h-16 rounded-lg border border-cyan-500/30 bg-cyan-500/5 flex items-center justify-center">
-            <span className="text-xl">📦</span>
+            <span className="text-sm font-mono font-bold tracking-tight text-cyan-400">PKG</span>
           </div>
           <span className="text-[10px] text-cyan-400 font-medium">Image</span>
           <span className="text-[9px] text-zinc-600">(blueprint)</span>
@@ -223,9 +223,9 @@ export function VolumeDiagram() {
           <motion.span
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="text-base"
+            className="text-xs font-mono font-bold tracking-tight text-amber-400"
           >
-            💾
+            VOL
           </motion.span>
         }
       />

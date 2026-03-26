@@ -31,7 +31,7 @@ interface CanvasState {
   setNodeStatus: (
     nodeId: string,
     status: SketchNodeData["status"],
-    errorMessage?: string,
+    statusMessage?: string,
   ) => void;
   resetNodeStatuses: () => void;
   setSimulationRunning: (running: boolean) => void;
@@ -78,10 +78,10 @@ export const useCanvasStore = create<CanvasState>((set, get) => ({
 
   setSelectedNodeId: (id) => set({ selectedNodeId: id }),
 
-  setNodeStatus: (nodeId, status, errorMessage) =>
+  setNodeStatus: (nodeId, status, statusMessage) =>
     set({
       nodes: get().nodes.map((n) =>
-        n.id === nodeId ? { ...n, data: { ...n.data, status, errorMessage } } : n,
+        n.id === nodeId ? { ...n, data: { ...n.data, status, statusMessage } } : n,
       ),
     }),
 
@@ -89,7 +89,7 @@ export const useCanvasStore = create<CanvasState>((set, get) => ({
     set({
       nodes: get().nodes.map((n) => ({
         ...n,
-        data: { ...n.data, status: "idle" as const, errorMessage: undefined },
+        data: { ...n.data, status: "idle" as const, statusMessage: undefined },
       })),
     }),
 

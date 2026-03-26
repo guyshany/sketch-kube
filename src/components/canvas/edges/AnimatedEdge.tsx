@@ -56,13 +56,8 @@ function AnimatedEdge({
         }}
       />
       {isAnimating && (
-        <circle r="4" fill="#6366f1">
+        <circle r="6" fill="#6366f1">
           <animateMotion dur="1.5s" repeatCount="indefinite" path={edgePath} />
-        </circle>
-      )}
-      {status === "success" && (
-        <circle r="4" fill="#22c55e" opacity="0.8">
-          <animateMotion dur="1s" repeatCount="1" path={edgePath} />
         </circle>
       )}
     </>

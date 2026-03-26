@@ -179,7 +179,7 @@ export interface SketchNodeData extends Record<string, unknown> {
   componentType: ComponentType;
   config: NodeConfig;
   status?: "idle" | "success" | "error" | "running";
-  errorMessage?: string;
+  statusMessage?: string;
 }
 
 export interface ComponentDefinition {
