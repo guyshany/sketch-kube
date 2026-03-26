@@ -6,13 +6,13 @@ import { AnimatedBox, AnimatedArrow } from "./AnimatedBox";
 export function WorksOnMyMachine() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-3"
     >
       <div className="flex items-center justify-center gap-6">
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
+          initial={{ opacity: 0, x: -4 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
           className="flex flex-col items-center gap-2"
@@ -36,7 +36,7 @@ export function WorksOnMyMachine() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
+          initial={{ opacity: 0, x: 4 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.8 }}
           className="flex flex-col items-center gap-2"
@@ -52,7 +52,7 @@ export function WorksOnMyMachine() {
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 5 }}
+        initial={{ opacity: 0, y: 3 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2 }}
         className="flex justify-center gap-3 text-[10px] text-zinc-600"
@@ -84,7 +84,7 @@ export function DockerImageDiagram() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-3"
     >
@@ -94,7 +94,7 @@ export function DockerImageDiagram() {
           {layers.map((layer, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -4 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 + i * 0.2 }}
               className={`w-44 px-3 py-1.5 rounded border font-mono text-[10px] text-center ${layer.color}`}
@@ -107,7 +107,7 @@ export function DockerImageDiagram() {
         <AnimatedArrow delay={1.2} label="build" />
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 1.5, type: "spring" }}
           className="flex flex-col items-center gap-2"
@@ -126,13 +126,13 @@ export function DockerImageDiagram() {
 export function ContainerDiagram() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-3"
     >
       <div className="flex items-center justify-center gap-3">
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, type: "spring" }}
           className="flex flex-col items-center gap-1"
@@ -150,14 +150,14 @@ export function ContainerDiagram() {
           {[1, 2, 3].map((i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: 4 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8 + i * 0.2, type: "spring" }}
               className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-emerald-500/30 bg-emerald-500/5"
             >
               <motion.div
                 className="w-2 h-2 rounded-full bg-emerald-500"
-                animate={{ scale: [1, 1.3, 1] }}
+                animate={{ scale: [1, 1.15, 1] }}
                 transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
               />
               <span className="text-[10px] text-emerald-400 font-mono">container-{i}</span>
@@ -182,7 +182,7 @@ export function ContainerDiagram() {
 export function VolumeDiagram() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex items-center justify-center gap-3"
     >

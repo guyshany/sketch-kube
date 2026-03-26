@@ -11,14 +11,15 @@ import { runAllTests, type TestResult } from "@/lib/engine/validator";
 import { buildSimulationSteps, runSimulation } from "@/lib/engine/simulator";
 import { useAchievements } from "@/lib/hooks/use-achievements";
 import CompletionModal from "./CompletionModal";
-import type { Challenge } from "@/types/stages";
+import type { Challenge, Stage } from "@/types/stages";
 
 interface SimulationRunnerProps {
   challenge: Challenge;
-  stageId: string;
+  stage: Stage;
 }
 
-export default function SimulationRunner({ challenge, stageId }: SimulationRunnerProps) {
+export default function SimulationRunner({ challenge, stage }: SimulationRunnerProps) {
+  const stageId = stage.id;
   const [results, setResults] = useState<TestResult[]>([]);
   const [running, setRunning] = useState(false);
   const [showCompletion, setShowCompletion] = useState(false);
@@ -32,6 +33,9 @@ export default function SimulationRunner({ challenge, stageId }: SimulationRunne
   const setEdges = useCanvasStore((s) => s.setEdges);
 
   const hintsRevealed = useLessonStore((s) => s.hintsRevealed);
+  const currentChallengeIndex = useLessonStore((s) => s.currentChallengeIndex);
+  const setCurrentChallengeIndex = useLessonStore((s) => s.setCurrentChallengeIndex);
+  const resetHints = useLessonStore((s) => s.resetHints);
   const completeChallenge = useProgressStore((s) => s.completeChallenge);
   const { onChallengeCompleted } = useAchievements();
   const { fitView } = useReactFlow();
@@ -43,7 +47,7 @@ export default function SimulationRunner({ challenge, stageId }: SimulationRunne
     resetNodeStatuses();
     setResults([]);
 
-    const testResults = runAllTests(nodes, edges, challenge.testCases);
+    const testResults = runAllTests(nodes, edges, challenge.testCases ?? []);
 
     for (const result of testResults) {
       const steps = buildSimulationSteps(result, edges);
@@ -99,6 +103,15 @@ export default function SimulationRunner({ challenge, stageId }: SimulationRunne
       })),
     );
   }, [resetNodeStatuses, setEdges, edges]);
+
+  const nextChallenge = stage.challenges[currentChallengeIndex + 1];
+
+  const handleNextChallenge = useCallback(() => {
+    setShowCompletion(false);
+    handleReset();
+    resetHints();
+    setCurrentChallengeIndex(currentChallengeIndex + 1);
+  }, [currentChallengeIndex, setCurrentChallengeIndex, resetHints, handleReset]);
 
   const allPassed = results.length > 0 && results.every((r) => r.passed);
   const hasFailed = results.some((r) => !r.passed);
@@ -208,6 +221,8 @@ export default function SimulationRunner({ challenge, stageId }: SimulationRunne
           handleReset();
         }}
         onClose={() => setShowCompletion(false)}
+        onNextChallenge={nextChallenge ? handleNextChallenge : undefined}
+        nextChallengeTitle={nextChallenge?.title}
       />
     </div>
   );

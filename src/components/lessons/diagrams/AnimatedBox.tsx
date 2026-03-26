@@ -22,9 +22,9 @@ export function AnimatedBox({
 }: AnimatedBoxProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay, duration: 0.4, type: "spring", damping: 15 }}
+      transition={{ delay, duration: 0.25 }}
       className={cn(
         "relative flex flex-col items-center justify-center rounded-lg border px-4 py-2.5 text-xs font-medium",
         color,
@@ -56,7 +56,7 @@ export function AnimatedArrow({
   const isRight = direction === "right";
   return (
     <motion.div
-      initial={{ opacity: 0, x: isRight ? -10 : 0, y: isRight ? 0 : -10 }}
+      initial={{ opacity: 0, x: isRight ? -3 : 0, y: isRight ? 0 : -3 }}
       animate={{ opacity: 1, x: 0, y: 0 }}
       transition={{ delay, duration: 0.3 }}
       className={cn("flex items-center justify-center", color)}
@@ -129,12 +129,12 @@ export function PulsingDot({ delay = 0, color = "bg-indigo-500", className }: Pu
     >
       <motion.div
         className={cn("w-2.5 h-2.5 rounded-full", color)}
-        animate={{ scale: [1, 1.4, 1] }}
+        animate={{ scale: [1, 1.1, 1] }}
         transition={{ duration: 1.5, repeat: Infinity, delay: delay + 0.3 }}
       />
       <motion.div
         className={cn("absolute inset-0 w-2.5 h-2.5 rounded-full", color)}
-        animate={{ scale: [1, 2.5], opacity: [0.5, 0] }}
+        animate={{ scale: [1, 1.4], opacity: [0.4, 0] }}
         transition={{ duration: 1.5, repeat: Infinity, delay: delay + 0.3 }}
       />
     </motion.div>

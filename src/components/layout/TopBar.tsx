@@ -2,7 +2,10 @@
 
 import Link from "next/link";
 import { ArrowLeft, Star } from "lucide-react";
-import { useProgressStore } from "@/lib/store/progress-store";
+import {
+  useProgressStore,
+  useProgressHydrated,
+} from "@/lib/store/progress-store";
 import Logo from "@/components/layout/Logo";
 import AchievementsPanel from "@/components/achievements/AchievementsPanel";
 import type { Stage } from "@/types/stages";
@@ -12,7 +15,9 @@ interface TopBarProps {
 }
 
 export default function TopBar({ stage }: TopBarProps) {
-  const totalStars = useProgressStore((s) => s.getTotalStars());
+  const hydrated = useProgressHydrated();
+  const rawStars = useProgressStore((s) => s.getTotalStars());
+  const totalStars = hydrated ? rawStars : 0;
 
   return (
     <header className="h-12 border-b border-zinc-800 bg-zinc-900/80 backdrop-blur-sm flex items-center justify-between px-4 flex-shrink-0">

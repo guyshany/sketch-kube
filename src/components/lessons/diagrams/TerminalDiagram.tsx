@@ -13,7 +13,7 @@ export function TerminalIntro() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="rounded-lg bg-zinc-950 border border-zinc-800 overflow-hidden font-mono text-xs"
     >
@@ -70,7 +70,7 @@ export function TerminalIntro() {
 export function CommandStructure() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-3"
     >
@@ -105,7 +105,7 @@ export function CommandStructure() {
       </div>
       <div className="flex gap-4 text-[10px] justify-center">
         <motion.div
-          initial={{ opacity: 0, y: 5 }}
+          initial={{ opacity: 0, y: 3 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
           className="flex items-center gap-1"
@@ -114,7 +114,7 @@ export function CommandStructure() {
           <span className="text-zinc-500">Command</span>
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, y: 5 }}
+          initial={{ opacity: 0, y: 3 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
           className="flex items-center gap-1"
@@ -123,7 +123,7 @@ export function CommandStructure() {
           <span className="text-zinc-500">Flags</span>
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, y: 5 }}
+          initial={{ opacity: 0, y: 3 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0 }}
           className="flex items-center gap-1"
@@ -165,7 +165,7 @@ export function PipeDiagram() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-4"
     >
@@ -173,7 +173,7 @@ export function PipeDiagram() {
         {steps.map((step, i) => (
           <div key={i} className="flex items-center gap-1">
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: i * 0.4, type: "spring", damping: 15 }}
               className={`px-3 py-2 rounded-lg border font-mono text-xs ${step.color}`}

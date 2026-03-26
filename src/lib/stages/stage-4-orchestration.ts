@@ -4,9 +4,16 @@ export const stage4Orchestration: Stage = {
   id: "stage-4",
   number: 4,
   title: "Container Orchestration",
-  description: "Understand why we need container orchestration -- scaling, load balancing, and health monitoring.",
+  description:
+    "Understand why we need container orchestration -- scaling, load balancing, and health monitoring.",
   icon: "Network",
   unlockedBy: "stage-3",
+  narrative: {
+    intro:
+      "NovaCraft's app is getting popular! One container isn't enough anymore — you need multiple copies, automatic restarts when things crash, and a way to distribute traffic. Manual management won't scale. It's time to learn about orchestration.",
+    context:
+      "Prepare for production by understanding scaling, load balancing, and health checks.",
+  },
   lessons: [
     {
       id: "4-1",
@@ -80,13 +87,6 @@ In the challenge, you'll build a scaled setup with a load balancer and health ch
           validations: [
             {
               nodeType: "loadbalancer",
-              field: "name",
-              operator: "exists",
-              value: true,
-              message: "Load balancer needs a name.",
-            },
-            {
-              nodeType: "loadbalancer",
               field: "algorithm",
               operator: "exists",
               value: true,
@@ -107,7 +107,8 @@ In the challenge, you'll build a scaled setup with a load balancer and health ch
               field: "image",
               operator: "exists",
               value: true,
-              message: "Container must reference an image (e.g., 'nginx:latest').",
+              message:
+                "Container must reference an image (e.g., 'nginx:latest').",
             },
           ],
           successMessage: "Traffic flows from load balancer to container!",

@@ -1,13 +1,80 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { glossary } from "@/components/glossary/GlossaryTooltip";
+
+function DeepDiveBlock({ title, children }: { title: string; children: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="my-3 rounded-lg border border-dashed border-zinc-700 bg-zinc-800/30">
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex items-center gap-2 w-full px-4 py-2.5 text-left hover:bg-zinc-800/50 transition-colors rounded-lg"
+      >
+        <ChevronRight className={cn("w-3.5 h-3.5 text-indigo-400 transition-transform", open && "rotate-90")} />
+        <span className="text-sm text-indigo-400 font-medium">{title}</span>
+      </button>
+      <div
+        className={cn(
+          "overflow-hidden transition-all duration-300",
+          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0",
+        )}
+      >
+        <div className="px-4 pb-3 pt-0 text-[14px] text-zinc-400 leading-relaxed">
+          {children.split("\n").map((line, i) => (
+            <p key={i} className={line.trim() ? "my-1" : "my-2"}>{line}</p>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const deepDiveRegex = /\[deep-dive:\s*(.+?)\]\n([\s\S]*?)\[\/deep-dive\]/g;
+
+function extractDeepDives(text: string): { segments: Array<{ type: "text"; value: string } | { type: "deep-dive"; title: string; content: string }> } {
+  const segments: Array<{ type: "text"; value: string } | { type: "deep-dive"; title: string; content: string }> = [];
+  let lastIndex = 0;
+
+  for (const match of text.matchAll(deepDiveRegex)) {
+    const before = text.slice(lastIndex, match.index);
+    if (before.trim()) segments.push({ type: "text", value: before });
+    segments.push({ type: "deep-dive", title: match[1], content: match[2].trim() });
+    lastIndex = match.index! + match[0].length;
+  }
+
+  const remaining = text.slice(lastIndex);
+  if (remaining.trim()) segments.push({ type: "text", value: remaining });
+
+  return { segments };
+}
 
 export default function FormattedContent({ text }: { text: string }) {
   const elements = useMemo(() => {
+    const { segments } = extractDeepDives(text);
+
+    if (segments.length > 1 || segments.some((s) => s.type === "deep-dive")) {
+      return segments.map((seg, sIdx) => {
+        if (seg.type === "deep-dive") {
+          return <DeepDiveBlock key={`dd-${sIdx}`} title={seg.title}>{seg.content}</DeepDiveBlock>;
+        }
+        return renderParagraphs(seg.value, sIdx * 1000);
+      });
+    }
+
+    return renderParagraphs(text, 0);
+  }, [text]);
+
+  return <div>{elements}</div>;
+}
+
+function renderParagraphs(text: string, keyOffset: number) {
     const paragraphs = text.split(/\n\n+/);
 
-    return paragraphs.map((para, pIdx) => {
+    return paragraphs.map((para, rawPIdx) => {
+      const pIdx = rawPIdx + keyOffset;
       const trimmed = para.trim();
       if (!trimmed) return null;
 
@@ -90,9 +157,6 @@ export default function FormattedContent({ text }: { text: string }) {
         </p>
       );
     });
-  }, [text]);
-
-  return <div>{elements}</div>;
 }
 
 const glossaryTerms = Object.keys(glossary).sort((a, b) => b.length - a.length);

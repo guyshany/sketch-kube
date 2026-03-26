@@ -4,6 +4,7 @@ import { ChevronUp, ChevronDown, Lightbulb, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLessonStore } from "@/lib/store/lesson-store";
 import FormattedContent from "@/components/lessons/FormattedContent";
+import LiveTestIndicator from "@/components/lessons/LiveTestIndicator";
 import type { Stage } from "@/types/stages";
 import SimulationRunner from "@/components/simulation/SimulationRunner";
 
@@ -46,6 +47,9 @@ export default function ChallengeBar({ stage }: ChallengeBarProps) {
             <ChevronUp className="w-4 h-4 text-zinc-500" />
           )}
         </button>
+        {!drawerOpen && (
+          <LiveTestIndicator challenge={currentChallenge} compact />
+        )}
         <button
           onClick={() => setMode("lesson")}
           className="flex items-center gap-1 text-[10px] text-zinc-500 hover:text-zinc-300 px-2 py-0.5 rounded hover:bg-zinc-800 transition-colors"
@@ -94,10 +98,11 @@ export default function ChallengeBar({ stage }: ChallengeBarProps) {
                 </div>
               )}
             </div>
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 space-y-4">
+              <LiveTestIndicator challenge={currentChallenge} />
               <SimulationRunner
                 challenge={currentChallenge}
-                stageId={stage.id}
+                stage={stage}
               />
             </div>
           </div>

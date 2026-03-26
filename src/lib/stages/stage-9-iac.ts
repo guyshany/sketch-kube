@@ -4,9 +4,16 @@ export const stage9IaC: Stage = {
   id: "stage-9",
   number: 9,
   title: "Infrastructure as Code",
-  description: "Learn how Pulumi and IaC tools let you define and manage infrastructure using real programming languages.",
+  description:
+    "Learn how Pulumi and IaC tools let you define and manage infrastructure using real programming languages.",
   icon: "Blocks",
   unlockedBy: "stage-8",
+  narrative: {
+    intro:
+      "NovaCraft is growing fast and the infrastructure is getting complex — multiple clusters, cloud resources, databases. The CTO wants infrastructure changes to go through code review, just like application code. Enter Infrastructure as Code with Pulumi.",
+    context:
+      "Define and manage cloud infrastructure using real programming languages.",
+  },
   lessons: [
     {
       id: "9-1",
@@ -94,7 +101,12 @@ You've completed the journey from shell commands to full infrastructure as code!
       title: "Define Infrastructure with Pulumi",
       description:
         "Create a Pulumi Stack, connect it to a Provider (kubernetes), and show the provider managing a Deployment and Service.",
-      availableComponents: ["pulumistack", "pulumiprovider", "deployment", "service"],
+      availableComponents: [
+        "pulumistack",
+        "pulumiprovider",
+        "deployment",
+        "service",
+      ],
       testCases: [
         {
           id: "test-9-1",
@@ -103,13 +115,6 @@ You've completed the journey from shell commands to full infrastructure as code!
           entryPoint: "pulumistack",
           expectedPath: ["pulumistack"],
           validations: [
-            {
-              nodeType: "pulumistack",
-              field: "name",
-              operator: "exists",
-              value: true,
-              message: "Stack needs a name (e.g., 'production').",
-            },
             {
               nodeType: "pulumistack",
               field: "runtime",
@@ -132,7 +137,8 @@ You've completed the journey from shell commands to full infrastructure as code!
               field: "provider",
               operator: "exists",
               value: true,
-              message: "Provider must specify a cloud provider (e.g., 'kubernetes').",
+              message:
+                "Provider must specify a cloud provider (e.g., 'kubernetes').",
             },
           ],
           successMessage: "Provider is connected to the Stack!",
@@ -143,15 +149,7 @@ You've completed the journey from shell commands to full infrastructure as code!
           description: "Resources are managed by the provider",
           entryPoint: "pulumiprovider",
           expectedPath: ["pulumiprovider", "deployment"],
-          validations: [
-            {
-              nodeType: "deployment",
-              field: "name",
-              operator: "exists",
-              value: true,
-              message: "Deployment needs a name.",
-            },
-          ],
+          validations: [],
           successMessage: "Infrastructure is fully managed by Pulumi!",
         },
         {
@@ -161,13 +159,6 @@ You've completed the journey from shell commands to full infrastructure as code!
           entryPoint: "deployment",
           expectedPath: ["deployment", "service"],
           validations: [
-            {
-              nodeType: "service",
-              field: "name",
-              operator: "exists",
-              value: true,
-              message: "Service needs a name.",
-            },
             {
               nodeType: "service",
               field: "port",

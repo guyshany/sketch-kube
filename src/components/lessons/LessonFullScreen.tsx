@@ -7,6 +7,7 @@ import { useProgressStore } from "@/lib/store/progress-store";
 import { DiagramRenderer } from "@/components/lessons/diagrams";
 import FormattedContent from "@/components/lessons/FormattedContent";
 import GlossaryTooltip from "@/components/glossary/GlossaryTooltip";
+import QuizCard from "@/components/lessons/QuizCard";
 import type { Stage } from "@/types/stages";
 
 interface LessonFullScreenProps {
@@ -17,11 +18,15 @@ export default function LessonFullScreen({ stage }: LessonFullScreenProps) {
   const currentLessonIndex = useLessonStore((s) => s.currentLessonIndex);
   const setCurrentLessonIndex = useLessonStore((s) => s.setCurrentLessonIndex);
   const setMode = useLessonStore((s) => s.setMode);
+  const quizAnswered = useLessonStore((s) => s.quizAnswered);
+  const setQuizAnswered = useLessonStore((s) => s.setQuizAnswered);
   const completeLesson = useProgressStore((s) => s.completeLesson);
 
   const lessons = stage.lessons;
   const currentLesson = lessons[currentLessonIndex];
   const isLastLesson = currentLessonIndex >= lessons.length - 1;
+  const hasQuiz = currentLesson?.quiz && currentLesson.quiz.length > 0;
+  const nextBlocked = hasQuiz && !quizAnswered;
 
   const handleNext = () => {
     if (currentLesson) {
@@ -79,6 +84,12 @@ export default function LessonFullScreen({ stage }: LessonFullScreenProps) {
                     {currentLesson.title}
                   </h2>
                   <FormattedContent text={currentLesson.content} />
+                  {hasQuiz && !quizAnswered && (
+                    <QuizCard
+                      questions={currentLesson.quiz!}
+                      onComplete={() => setQuizAnswered(true)}
+                    />
+                  )}
                 </div>
               </GlossaryTooltip>
             </div>
@@ -100,6 +111,12 @@ export default function LessonFullScreen({ stage }: LessonFullScreenProps) {
                   {currentLesson.title}
                 </h2>
                 <FormattedContent text={currentLesson.content} />
+                {hasQuiz && !quizAnswered && (
+                  <QuizCard
+                    questions={currentLesson.quiz!}
+                    onComplete={() => setQuizAnswered(true)}
+                  />
+                )}
               </div>
             </GlossaryTooltip>
           </div>
@@ -129,7 +146,13 @@ export default function LessonFullScreen({ stage }: LessonFullScreenProps) {
 
           <button
             onClick={handleNext}
-            className="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium bg-indigo-600 hover:bg-indigo-500 text-white transition-colors shadow-lg shadow-indigo-600/20"
+            disabled={nextBlocked}
+            className={cn(
+              "flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium transition-colors",
+              nextBlocked
+                ? "bg-zinc-700 text-zinc-500 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/20",
+            )}
           >
             {isLastLesson ? "Start Challenge" : "Next Lesson"}
             <ArrowRight className="w-4 h-4" />

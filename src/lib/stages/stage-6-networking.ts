@@ -4,9 +4,16 @@ export const stage6Networking: Stage = {
   id: "stage-6",
   number: 6,
   title: "K8s Networking",
-  description: "Master Kubernetes networking: expose services externally with NodePort, LoadBalancer, and Ingress.",
+  description:
+    "Master Kubernetes networking: expose services externally with NodePort, LoadBalancer, and Ingress.",
   icon: "Globe",
   unlockedBy: "stage-5",
+  narrative: {
+    intro:
+      "NovaCraft's app is running on Kubernetes, but it's only accessible inside the cluster. The product team needs it reachable from the internet — with a proper domain name and HTTPS. Time to learn K8s networking and expose your services to the world.",
+    context:
+      "Make the application accessible from the internet via Ingress and external services.",
+  },
   lessons: [
     {
       id: "6-1",
@@ -85,13 +92,6 @@ Let's build this!`,
           entryPoint: "deployment",
           expectedPath: ["deployment"],
           validations: [
-            {
-              nodeType: "deployment",
-              field: "name",
-              operator: "exists",
-              value: true,
-              message: "Deployment needs a name.",
-            },
             {
               nodeType: "deployment",
               field: "image",

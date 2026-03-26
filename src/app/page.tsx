@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { stages } from "@/lib/stages";
-import { useProgressStore } from "@/lib/store/progress-store";
+import { useProgressStore, useProgressHydrated } from "@/lib/store/progress-store";
 import TopBar from "@/components/layout/TopBar";
 import Logo from "@/components/layout/Logo";
 import ProgressBar from "@/components/progress/ProgressBar";
@@ -31,16 +31,19 @@ const stageGradients = [
 ];
 
 export default function HomePage() {
+  const hydrated = useProgressHydrated();
   const isStageUnlocked = useProgressStore((s) => s.isStageUnlocked);
   const isStageCompleted = useProgressStore((s) => s.isStageCompleted);
   const getStageStars = useProgressStore((s) => s.getStageStars);
   const getTotalStars = useProgressStore((s) => s.getTotalStars);
-  const totalStars = getTotalStars();
+  const totalStars = hydrated ? getTotalStars() : 0;
   const maxTotalStars = stages.reduce(
     (sum, s) => sum + s.challenges.reduce((cs, c) => cs + c.maxStars, 0),
     0,
   );
-  const completedStages = stages.filter((s) => isStageCompleted(s.id)).length;
+  const completedStages = hydrated
+    ? stages.filter((s) => isStageCompleted(s.id)).length
+    : 0;
 
   return (
     <div className="min-h-screen bg-zinc-950 flex flex-col">
@@ -98,9 +101,11 @@ export default function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {stages.map((stage, index) => {
-            const unlocked = isStageUnlocked(stage.id, stage.unlockedBy);
-            const completed = isStageCompleted(stage.id);
-            const stars = getStageStars(stage.id);
+            const unlocked = hydrated
+              ? isStageUnlocked(stage.id, stage.unlockedBy)
+              : !stage.unlockedBy;
+            const completed = hydrated && isStageCompleted(stage.id);
+            const stars = hydrated ? getStageStars(stage.id) : 0;
             const maxStars = stage.challenges.reduce((s, c) => s + c.maxStars, 0);
             const Icon = iconMap[stage.icon] ?? Terminal;
             const gradient = stageGradients[index] ?? stageGradients[0];

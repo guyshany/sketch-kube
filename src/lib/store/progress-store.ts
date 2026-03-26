@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { StageProgress, ChallengeResult } from "@/types/stages";
@@ -123,3 +124,15 @@ export const useProgressStore = create<ProgressState>()(
     },
   ),
 );
+
+export function useProgressHydrated() {
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    const unsub = useProgressStore.persist.onFinishHydration(() =>
+      setHydrated(true),
+    );
+    setHydrated(useProgressStore.persist.hasHydrated());
+    return unsub;
+  }, []);
+  return hydrated;
+}

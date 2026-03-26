@@ -4,9 +4,16 @@ export const stage7Storage: Stage = {
   id: "stage-7",
   number: 7,
   title: "K8s Storage & Config",
-  description: "Learn how Kubernetes manages configuration with ConfigMaps and Secrets, and persistent data with Volumes.",
+  description:
+    "Learn how Kubernetes manages configuration with ConfigMaps and Secrets, and persistent data with Volumes.",
   icon: "Database",
   unlockedBy: "stage-6",
+  narrative: {
+    intro:
+      "NovaCraft's app needs a database and some configuration: API keys, connection strings, feature flags. You can't hardcode these into containers. Kubernetes has dedicated resources for config data, secrets, and persistent storage.",
+    context:
+      "Configure the app with ConfigMaps and Secrets, and set up persistent storage.",
+  },
   lessons: [
     {
       id: "7-1",
@@ -81,7 +88,14 @@ Let's configure storage and config for a database!`,
       title: "Configure a Stateful Database",
       description:
         "Set up a Deployment for a database, attach a ConfigMap for configuration (like DB_HOST), a Secret for sensitive data (like DB_PASSWORD), and a PersistentVolumeClaim for data storage.",
-      availableComponents: ["deployment", "configmap", "secret", "pvc", "pv", "service"],
+      availableComponents: [
+        "deployment",
+        "configmap",
+        "secret",
+        "pvc",
+        "pv",
+        "service",
+      ],
       testCases: [
         {
           id: "test-7-1",
@@ -92,17 +106,11 @@ Let's configure storage and config for a database!`,
           validations: [
             {
               nodeType: "deployment",
-              field: "name",
-              operator: "exists",
-              value: true,
-              message: "Deployment needs a name (e.g., 'postgres').",
-            },
-            {
-              nodeType: "deployment",
               field: "image",
               operator: "exists",
               value: true,
-              message: "Deployment needs a database image (e.g., 'postgres:15').",
+              message:
+                "Deployment needs a database image (e.g., 'postgres:15').",
             },
           ],
           successMessage: "Database Deployment is configured!",
@@ -114,13 +122,6 @@ Let's configure storage and config for a database!`,
           entryPoint: "deployment",
           expectedPath: ["deployment", "configmap"],
           validations: [
-            {
-              nodeType: "configmap",
-              field: "name",
-              operator: "exists",
-              value: true,
-              message: "ConfigMap needs a name.",
-            },
             {
               nodeType: "configmap",
               field: "data",
@@ -138,13 +139,6 @@ Let's configure storage and config for a database!`,
           entryPoint: "deployment",
           expectedPath: ["deployment", "secret"],
           validations: [
-            {
-              nodeType: "secret",
-              field: "name",
-              operator: "exists",
-              value: true,
-              message: "Secret needs a name.",
-            },
             {
               nodeType: "secret",
               field: "data",

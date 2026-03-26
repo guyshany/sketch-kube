@@ -8,6 +8,7 @@ import { stage6Networking } from "./stage-6-networking";
 import { stage7Storage } from "./stage-7-storage";
 import { stage8Helm } from "./stage-8-helm";
 import { stage9IaC } from "./stage-9-iac";
+import { stage10ArgoCD } from "./stage-10-argocd";
 
 export const stages: Stage[] = [
   stage1Terminal,
@@ -19,6 +20,7 @@ export const stages: Stage[] = [
   stage7Storage,
   stage8Helm,
   stage9IaC,
+  stage10ArgoCD,
 ];
 
 export function getStageById(id: string): Stage | undefined {

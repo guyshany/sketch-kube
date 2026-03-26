@@ -29,7 +29,7 @@ export function ServiceTypesDiagram() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-2"
     >
@@ -37,7 +37,7 @@ export function ServiceTypesDiagram() {
         {types.map((t) => (
           <motion.div
             key={t.name}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: t.delay, type: "spring", damping: 15 }}
             className={`flex flex-col items-center gap-1.5 px-4 py-3 rounded-lg border ${t.color}`}
@@ -57,7 +57,7 @@ export function ServiceTypesDiagram() {
 export function IngressDiagram() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex flex-col items-center gap-2"
     >
@@ -81,7 +81,7 @@ export function IngressDiagram() {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.5, type: "spring" }}
         className="relative px-6 py-3 rounded-xl border-2 border-violet-500/30 bg-violet-500/5"
@@ -91,7 +91,7 @@ export function IngressDiagram() {
         </span>
         <div className="flex flex-col gap-1 mt-1">
           <motion.div
-            initial={{ opacity: 0, x: -10 }}
+            initial={{ opacity: 0, x: -3 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.8 }}
             className="flex items-center gap-2 text-[9px]"
@@ -101,7 +101,7 @@ export function IngressDiagram() {
             <span className="text-blue-400">api-svc:8080</span>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, x: -10 }}
+            initial={{ opacity: 0, x: -3 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.0 }}
             className="flex items-center gap-2 text-[9px]"
@@ -136,7 +136,7 @@ export function IngressDiagram() {
         ].map((svc, i) => (
           <motion.div
             key={svc.label}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 3 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.4 + i * 0.15 }}
             className={`px-3 py-1.5 rounded border text-[10px] ${svc.color}`}
@@ -159,14 +159,14 @@ export function FullStackDiagram() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex flex-col items-center gap-1"
     >
       {layers.map((layer, i) => (
         <div key={layer.label} className="flex flex-col items-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: layer.delay, type: "spring", damping: 15 }}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg border ${layer.color}`}

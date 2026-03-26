@@ -10,8 +10,15 @@ import SketchCanvas from "@/components/canvas/SketchCanvas";
 import ComponentPalette from "@/components/canvas/palette/ComponentPalette";
 import ConfigPanel from "@/components/canvas/config-panel/ConfigPanel";
 import LessonFullScreen from "@/components/lessons/LessonFullScreen";
+import NarrativeIntro from "@/components/lessons/NarrativeIntro";
 import ChallengeBar from "@/components/lessons/ChallengeBar";
+import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
+
+const TerminalChallengeRunner = dynamic(
+  () => import("@/components/terminal/TerminalChallengeRunner"),
+  { ssr: false },
+);
 
 export default function StagePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -20,6 +27,7 @@ export default function StagePage({ params }: { params: Promise<{ id: string }> 
   const resetLesson = useLessonStore((s) => s.reset);
   const selectedNodeId = useCanvasStore((s) => s.selectedNodeId);
   const mode = useLessonStore((s) => s.mode);
+  const narrativeSeen = useLessonStore((s) => s.narrativeSeen);
   const currentChallengeIndex = useLessonStore((s) => s.currentChallengeIndex);
 
   useEffect(() => {
@@ -39,8 +47,12 @@ export default function StagePage({ params }: { params: Promise<{ id: string }> 
       <div className="flex flex-col h-screen bg-zinc-950">
         <TopBar stage={stage} />
 
-        {mode === "lesson" ? (
+        {mode === "lesson" && !narrativeSeen && stage.narrative ? (
+          <NarrativeIntro stage={stage} />
+        ) : mode === "lesson" ? (
           <LessonFullScreen stage={stage} />
+        ) : challenge?.type === "terminal" ? (
+          <TerminalChallengeRunner challenge={challenge} stage={stage} />
         ) : (
           <div className="flex flex-1 overflow-hidden">
             <div className="w-44 flex-shrink-0">

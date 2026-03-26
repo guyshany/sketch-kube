@@ -1,11 +1,19 @@
 import type { ComponentType, SketchNodeData } from "./nodes";
 import type { Node, Edge } from "@xyflow/react";
 
+export interface QuizQuestion {
+  question: string;
+  options: string[];
+  correctIndex: number;
+  explanation: string;
+}
+
 export interface Lesson {
   id: string;
   title: string;
   content: string;
   diagram?: string;
+  quiz?: QuizQuestion[];
 }
 
 export interface Validation {
@@ -26,16 +34,36 @@ export interface TestCase {
   successMessage: string;
 }
 
+export interface TerminalValidation {
+  type: "command_match" | "output_contains" | "file_exists" | "file_contains";
+  pattern: string;
+}
+
+export interface TerminalTask {
+  id: string;
+  instruction: string;
+  validation: TerminalValidation;
+  successMessage: string;
+}
+
 export interface Challenge {
   id: string;
   title: string;
   description: string;
-  availableComponents: ComponentType[];
+  type?: "canvas" | "terminal";
+  availableComponents?: ComponentType[];
   initialNodes?: Node<SketchNodeData>[];
   initialEdges?: Edge[];
-  testCases: TestCase[];
+  testCases?: TestCase[];
+  terminalTasks?: TerminalTask[];
+  terminalFiles?: Record<string, string>;
   hints: string[];
   maxStars: number;
+}
+
+export interface StageNarrative {
+  intro: string;
+  context: string;
 }
 
 export interface Stage {
@@ -47,6 +75,7 @@ export interface Stage {
   lessons: Lesson[];
   challenges: Challenge[];
   unlockedBy?: string;
+  narrative?: StageNarrative;
 }
 
 export interface StageProgress {

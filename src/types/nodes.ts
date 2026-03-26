@@ -20,7 +20,10 @@ export type ComponentType =
   | "helmchart"
   | "helmrelease"
   | "pulumistack"
-  | "pulumiprovider";
+  | "pulumiprovider"
+  | "serviceaccount"
+  | "role"
+  | "rolebinding";
 
 export interface NodeConfig {
   [key: string]: string | number | boolean | string[] | undefined;
@@ -149,6 +152,28 @@ export interface PulumiProviderConfig extends NodeConfig {
   provider: string;
 }
 
+export interface NamespaceConfig extends NodeConfig {
+  name: string;
+}
+
+export interface ServiceAccountConfig extends NodeConfig {
+  name: string;
+  namespace: string;
+}
+
+export interface RoleConfig extends NodeConfig {
+  name: string;
+  namespace: string;
+  rules: string;
+}
+
+export interface RoleBindingConfig extends NodeConfig {
+  name: string;
+  namespace: string;
+  roleName: string;
+  subjects: string;
+}
+
 export type ConfigByType = {
   terminal: TerminalConfig;
   command: CommandConfig;
@@ -160,7 +185,7 @@ export type ConfigByType = {
   pod: PodConfig;
   deployment: DeploymentConfig;
   service: ServiceConfig;
-  namespace: NodeConfig;
+  namespace: NamespaceConfig;
   ingress: IngressConfig;
   configmap: ConfigMapConfig;
   secret: SecretConfig;
@@ -172,6 +197,9 @@ export type ConfigByType = {
   helmrelease: HelmReleaseConfig;
   pulumistack: PulumiStackConfig;
   pulumiprovider: PulumiProviderConfig;
+  serviceaccount: ServiceAccountConfig;
+  role: RoleConfig;
+  rolebinding: RoleBindingConfig;
 };
 
 export interface SketchNodeData extends Record<string, unknown> {

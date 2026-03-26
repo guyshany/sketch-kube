@@ -4,9 +4,15 @@ export const stage3Docker: Stage = {
   id: "stage-3",
   number: 3,
   title: "Containers & Docker",
-  description: "Learn how Docker packages applications into containers -- portable, isolated environments that run consistently everywhere.",
+  description:
+    "Learn how Docker packages applications into containers -- portable, isolated environments that run consistently everywhere.",
   icon: "Box",
   unlockedBy: "stage-2",
+  narrative: {
+    intro:
+      'A new developer just joined NovaCraft and can\'t get the app running on their machine — different OS, missing libraries. The CTO says: "We need to containerize everything." Your job: learn Docker and package the app so it runs identically everywhere.',
+    context: "Containerize NovaCraft's application so it works on any machine.",
+  },
   lessons: [
     {
       id: "3-1",
@@ -21,6 +27,20 @@ Why? Because the server has:
   - Different file paths
 
 This is the "it works on my machine" problem. Docker solves it.`,
+      quiz: [
+        {
+          question: "What core problem does Docker solve?",
+          options: [
+            "Making code run faster",
+            "Environment inconsistency between machines",
+            "Replacing the operating system",
+            "Writing code in any language",
+          ],
+          correctIndex: 1,
+          explanation:
+            "Docker packages your app with its exact environment (OS, libraries, config), so it runs the same everywhere — your laptop, staging, or production.",
+        },
+      ],
     },
     {
       id: "3-2",
@@ -43,7 +63,25 @@ Images are stored in registries (like Docker Hub) and identified by name and tag
   postgres:15
   myapp:v1.2.3
 
-An image is read-only. It's the blueprint, not the running thing.`,
+An image is read-only. It's the blueprint, not the running thing.
+
+[deep-dive: How do image layers work?]
+Each instruction in a Dockerfile creates a new layer. Layers are cached and shared between images. If you change only your app code (COPY . /app), Docker reuses the cached OS and dependency layers — making rebuilds fast. This is why you put frequently-changing instructions (like COPY) last in your Dockerfile.
+[/deep-dive]`,
+      quiz: [
+        {
+          question: "What is a Docker Image?",
+          options: [
+            "A running container",
+            "A read-only snapshot of a complete environment",
+            "A virtual machine",
+            "A configuration file",
+          ],
+          correctIndex: 1,
+          explanation:
+            "An image is a read-only blueprint containing the OS, code, dependencies, and config. Containers are created from images.",
+        },
+      ],
     },
     {
       id: "3-3",
@@ -63,7 +101,25 @@ You can run multiple containers from the same image:
   docker run -p 8080:80 nginx
   docker run -p 8081:80 nginx
 
-The "-p 8080:80" maps host port 8080 to container port 80.`,
+The "-p 8080:80" maps host port 8080 to container port 80.
+
+[deep-dive: Containers vs Virtual Machines]
+VMs run a full guest OS on a hypervisor — each VM has its own kernel, drivers, and system libraries (gigabytes of overhead). Containers share the host kernel and only package the application layer (megabytes). This makes containers much faster to start (seconds vs minutes) and far more resource-efficient. The tradeoff: containers provide process isolation, not full hardware isolation.
+[/deep-dive]`,
+      quiz: [
+        {
+          question: "How are containers different from virtual machines?",
+          options: [
+            "Containers include their own kernel",
+            "Containers share the host OS kernel, making them lightweight",
+            "Containers are slower but more secure",
+            "There is no difference",
+          ],
+          correctIndex: 1,
+          explanation:
+            "Containers share the host OS kernel and only package the application layer, making them much lighter and faster to start than VMs which include a full guest OS.",
+        },
+      ],
     },
     {
       id: "3-4",
@@ -116,7 +172,8 @@ In the challenge, you'll wire up an Image, Container, and Volume.`,
               field: "image",
               operator: "exists",
               value: true,
-              message: "Container must reference an image (e.g., 'nginx:latest').",
+              message:
+                "Container must reference an image (e.g., 'nginx:latest').",
             },
           ],
           successMessage: "Container is running the image!",
@@ -133,7 +190,8 @@ In the challenge, you'll wire up an Image, Container, and Volume.`,
               field: "mountPath",
               operator: "exists",
               value: true,
-              message: "Volume needs a mount path inside the container (e.g., '/data').",
+              message:
+                "Volume needs a mount path inside the container (e.g., '/data').",
             },
           ],
           successMessage: "Volume is mounted for persistent storage!",
@@ -161,6 +219,60 @@ In the challenge, you'll wire up an Image, Container, and Volume.`,
         "Add a Container, set its image field (e.g., 'nginx:latest'). Connect Image → Container.",
         "Add a Volume with a mount path (e.g., '/usr/share/nginx/html'). Connect Container → Volume.",
         "Add a Port node (e.g., port 80) and connect Container → Port to expose the service.",
+      ],
+      maxStars: 3,
+    },
+    {
+      id: "challenge-3-2",
+      title: "Docker CLI Practice",
+      type: "terminal",
+      description:
+        "Practice essential Docker commands: listing images, running containers, and inspecting running containers.",
+      terminalFiles: {
+        Dockerfile:
+          'FROM node:18-alpine\nWORKDIR /app\nCOPY package.json .\nRUN npm install\nCOPY . .\nEXPOSE 3000\nCMD ["node", "server.js"]',
+        "server.js":
+          'const http = require("http");\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { "Content-Type": "text/plain" });\n  res.end("Hello from Docker!");\n});\nserver.listen(3000);',
+        "package.json": '{ "name": "myapp", "version": "1.0.0" }',
+      },
+      terminalTasks: [
+        {
+          id: "t3-1",
+          instruction: "List available Docker images with `docker images`",
+          validation: { type: "command_match", pattern: "docker\\s+images" },
+          successMessage:
+            "You can see all images with their tags, IDs, and sizes!",
+        },
+        {
+          id: "t3-2",
+          instruction: "Run an nginx container: `docker run nginx`",
+          validation: { type: "command_match", pattern: "docker\\s+run" },
+          successMessage:
+            "docker run creates and starts a new container from an image!",
+        },
+        {
+          id: "t3-3",
+          instruction: "List running containers with `docker ps`",
+          validation: { type: "command_match", pattern: "docker\\s+ps" },
+          successMessage:
+            "docker ps shows all running containers with their ports and status!",
+        },
+        {
+          id: "t3-4",
+          instruction:
+            "Build an image from the Dockerfile: `docker build -t myapp:v1 .`",
+          validation: {
+            type: "output_contains",
+            pattern: "Successfully tagged",
+          },
+          successMessage:
+            "docker build creates an image from a Dockerfile. The -t flag gives it a name and tag!",
+        },
+      ],
+      hints: [
+        "Docker commands follow the pattern: docker <command> [options]",
+        "Use docker images to see images, docker ps to see containers.",
+        "The docker build command needs -t for tagging and . to specify the build context directory.",
       ],
       maxStars: 3,
     },

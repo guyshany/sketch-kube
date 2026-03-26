@@ -9,6 +9,7 @@ import { ServiceTypesDiagram, IngressDiagram, FullStackDiagram } from "./Network
 import { ConfigMapDiagram, SecretDiagram, PVDiagram } from "./StorageDiagram";
 import { HelmProblemDiagram, ChartStructureDiagram, HelmReleaseDiagram } from "./HelmDiagram";
 import { IaCIntroDiagram, PulumiCodeDiagram, StackProviderDiagram } from "./IaCDiagram";
+import { ArgoCDIntroDiagram, NamespaceSADiagram, RBACDiagram } from "./ArgoCDDiagram";
 
 interface DiagramEntry {
   component: React.ComponentType;
@@ -53,6 +54,10 @@ const diagramRegistry: Record<string, DiagramEntry> = {
   "iac-intro": { component: IaCIntroDiagram, scale: 1.5 },
   "pulumi-code": { component: PulumiCodeDiagram, scale: 1.4 },
   "stack-provider": { component: StackProviderDiagram, scale: 1.5 },
+
+  "argocd-intro": { component: ArgoCDIntroDiagram, scale: 1.4 },
+  "ns-sa-diagram": { component: NamespaceSADiagram, scale: 1.3 },
+  "rbac-diagram": { component: RBACDiagram, scale: 1.3 },
 };
 
 export function DiagramRenderer({ diagramId }: { diagramId: string }) {

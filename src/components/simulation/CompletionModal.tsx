@@ -15,6 +15,8 @@ interface CompletionModalProps {
   stageId: string;
   onRetry: () => void;
   onClose: () => void;
+  onNextChallenge?: () => void;
+  nextChallengeTitle?: string;
 }
 
 export default function CompletionModal({
@@ -24,6 +26,8 @@ export default function CompletionModal({
   stageId,
   onRetry,
   onClose,
+  onNextChallenge,
+  nextChallengeTitle,
 }: CompletionModalProps) {
   const [showStars, setShowStars] = useState(false);
 
@@ -105,7 +109,15 @@ export default function CompletionModal({
             </div>
 
             <div className="flex flex-col gap-2">
-              {nextStage && (
+              {onNextChallenge && nextChallengeTitle ? (
+                <button
+                  onClick={onNextChallenge}
+                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium transition-colors cursor-pointer"
+                >
+                  Next: {nextChallengeTitle}
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              ) : nextStage ? (
                 <Link
                   href={`/stage/${nextStage.id}`}
                   className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium transition-colors"
@@ -113,7 +125,7 @@ export default function CompletionModal({
                   Next: {nextStage.title}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
-              )}
+              ) : null}
               <button
                 onClick={onRetry}
                 className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-sm font-medium transition-colors"

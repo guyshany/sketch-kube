@@ -11,12 +11,12 @@ export function ConfigMapDiagram() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex items-center justify-center gap-4"
     >
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2, type: "spring" }}
         className="relative px-4 py-3 rounded-xl border border-blue-500/30 bg-blue-500/5"
@@ -28,7 +28,7 @@ export function ConfigMapDiagram() {
           {entries.map((e) => (
             <motion.div
               key={e.key}
-              initial={{ opacity: 0, x: -10 }}
+              initial={{ opacity: 0, x: -3 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: e.delay }}
               className="flex items-center gap-1"
@@ -56,7 +56,7 @@ export function ConfigMapDiagram() {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 1.2, type: "spring" }}
         className="px-4 py-3 rounded-xl border border-indigo-500/30 bg-indigo-500/5 flex flex-col items-center gap-1"
@@ -72,12 +72,12 @@ export function ConfigMapDiagram() {
 export function SecretDiagram() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex items-center justify-center gap-4"
     >
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2, type: "spring" }}
         className="relative px-4 py-3 rounded-xl border border-amber-500/30 bg-amber-500/5"
@@ -137,7 +137,7 @@ export function SecretDiagram() {
 export function PVDiagram() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex items-center justify-center gap-2"
     >
@@ -148,7 +148,7 @@ export function PVDiagram() {
       ].map((item, i) => (
         <div key={item.label} className="flex items-center gap-2">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: item.delay, type: "spring" }}
             className={`flex flex-col items-center gap-0.5 px-3 py-2 rounded-lg border ${item.color}`}

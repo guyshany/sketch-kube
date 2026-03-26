@@ -13,13 +13,13 @@ export function IaCIntroDiagram() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-3"
     >
       <div className="flex items-center justify-center gap-4">
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
+          initial={{ opacity: 0, x: -4 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1 }}
           className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg border border-red-500/30 bg-red-500/5"
@@ -38,7 +38,7 @@ export function IaCIntroDiagram() {
         </motion.span>
 
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
+          initial={{ opacity: 0, x: 4 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.4 }}
           className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg border border-emerald-500/30 bg-emerald-500/5"
@@ -52,7 +52,7 @@ export function IaCIntroDiagram() {
         {benefits.map((b) => (
           <motion.div
             key={b.label}
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: b.delay, type: "spring", damping: 12 }}
             className="flex items-center gap-1 px-2 py-1 rounded bg-zinc-800 border border-zinc-700 text-[9px] text-zinc-300"
@@ -82,7 +82,7 @@ export function PulumiCodeDiagram() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="rounded-lg bg-zinc-950 border border-zinc-800 overflow-hidden font-mono text-[10px]"
     >
@@ -112,12 +112,12 @@ export function PulumiCodeDiagram() {
 export function StackProviderDiagram() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex flex-col items-center gap-2"
     >
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2, type: "spring" }}
         className="px-5 py-2.5 rounded-xl border-2 border-purple-500/30 bg-purple-500/5 text-center"
@@ -141,7 +141,7 @@ export function StackProviderDiagram() {
         ].map((p) => (
           <motion.div
             key={p.name}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 3 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: p.delay, type: "spring" }}
             className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg border ${p.color}`}

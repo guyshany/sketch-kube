@@ -161,7 +161,7 @@ export default function LessonDrawer({ stage }: LessonDrawerProps) {
 
               <SimulationRunner
                 challenge={currentChallenge}
-                stageId={stage.id}
+                stage={stage}
               />
 
               {currentChallenge.hints.length > 0 && (

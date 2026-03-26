@@ -4,9 +4,15 @@ export const stage8Helm: Stage = {
   id: "stage-8",
   number: 8,
   title: "Helm Charts",
-  description: "Learn how Helm packages Kubernetes resources into reusable, configurable charts.",
+  description:
+    "Learn how Helm packages Kubernetes resources into reusable, configurable charts.",
   icon: "Package",
   unlockedBy: "stage-7",
+  narrative: {
+    intro:
+      "NovaCraft now has dev, staging, and production environments. Each needs the same set of K8s resources but with different configurations. Managing all those YAML files by hand is becoming a nightmare. The team adopts Helm to package and manage deployments.",
+    context: "Package the app's K8s resources into a reusable Helm Chart.",
+  },
   lessons: [
     {
       id: "8-1",
@@ -27,6 +33,20 @@ Managing all these YAML files manually is tedious. What if you need to:
   - Version your infrastructure?
 
 Helm is "the package manager for Kubernetes". It bundles K8s resources into a Chart.`,
+      quiz: [
+        {
+          question: "What problem does Helm solve?",
+          options: [
+            "Running containers without Kubernetes",
+            "Managing many YAML files across environments as a single package",
+            "Writing Kubernetes code in Go",
+            "Monitoring cluster health",
+          ],
+          correctIndex: 1,
+          explanation:
+            "Helm bundles all the YAML resources for an app into a Chart — one package you can version, share, and configure differently per environment.",
+        },
+      ],
     },
     {
       id: "8-2",
@@ -54,7 +74,25 @@ Different environments use different values:
   # values-dev.yaml
   replicaCount: 1
   image:
-    tag: "latest"`,
+    tag: "latest"
+
+[deep-dive: Go templating syntax]
+Helm uses Go's text/template engine. Double curly braces {{ }} denote template expressions. .Values refers to values.yaml, .Release has release metadata (name, namespace), and .Chart has chart metadata. You can use conditionals (if/else), loops (range), and helper functions (include, toYaml). This is powerful but can make templates hard to read — which is why tools like Kustomize take a different, overlay-based approach.
+[/deep-dive]`,
+      quiz: [
+        {
+          question: "What is the purpose of values.yaml in a Helm Chart?",
+          options: [
+            "It lists the Kubernetes cluster nodes",
+            "It defines default configuration that templates use to generate manifests",
+            "It stores container logs",
+            "It replaces the Dockerfile",
+          ],
+          correctIndex: 1,
+          explanation:
+            "values.yaml holds default configuration (replicas, image tags, etc.) that Helm injects into templates. Override it per environment with -f values-prod.yaml.",
+        },
+      ],
     },
     {
       id: "8-3",
@@ -86,7 +124,12 @@ In the challenge, you'll package a K8s setup as a Helm chart!`,
       title: "Create a Helm Release",
       description:
         "Define a Helm Chart, then create a Helm Release that deploys it. Connect the release to a Deployment and Service to show what the chart installs.",
-      availableComponents: ["helmchart", "helmrelease", "deployment", "service"],
+      availableComponents: [
+        "helmchart",
+        "helmrelease",
+        "deployment",
+        "service",
+      ],
       testCases: [
         {
           id: "test-8-1",
@@ -95,13 +138,6 @@ In the challenge, you'll package a K8s setup as a Helm chart!`,
           entryPoint: "helmchart",
           expectedPath: ["helmchart"],
           validations: [
-            {
-              nodeType: "helmchart",
-              field: "name",
-              operator: "exists",
-              value: true,
-              message: "Chart needs a name (e.g., 'my-webapp').",
-            },
             {
               nodeType: "helmchart",
               field: "version",
@@ -121,13 +157,6 @@ In the challenge, you'll package a K8s setup as a Helm chart!`,
           validations: [
             {
               nodeType: "helmrelease",
-              field: "name",
-              operator: "exists",
-              value: true,
-              message: "Release needs a name (e.g., 'my-app-prod').",
-            },
-            {
-              nodeType: "helmrelease",
               field: "chart",
               operator: "exists",
               value: true,
@@ -142,15 +171,7 @@ In the challenge, you'll package a K8s setup as a Helm chart!`,
           description: "The release creates K8s resources",
           entryPoint: "helmrelease",
           expectedPath: ["helmrelease", "deployment"],
-          validations: [
-            {
-              nodeType: "deployment",
-              field: "name",
-              operator: "exists",
-              value: true,
-              message: "A Deployment should be created by the release.",
-            },
-          ],
+          validations: [],
           successMessage: "Helm Release is managing K8s resources!",
         },
         {
@@ -160,13 +181,6 @@ In the challenge, you'll package a K8s setup as a Helm chart!`,
           entryPoint: "deployment",
           expectedPath: ["deployment", "service"],
           validations: [
-            {
-              nodeType: "service",
-              field: "name",
-              operator: "exists",
-              value: true,
-              message: "Service needs a name.",
-            },
             {
               nodeType: "service",
               field: "port",

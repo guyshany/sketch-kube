@@ -11,6 +11,7 @@ import {
   Hexagon, GitBranch, Globe, ArrowRightLeft, FileText,
   Lock, Database, DatabaseZap, Network, HeartPulse,
   Package, Rocket, Blocks, Cloud, X,
+  FolderOpen, UserCheck, Shield, ShieldCheck,
 } from "lucide-react";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -18,6 +19,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Hexagon, GitBranch, Globe, ArrowRightLeft, FileText,
   Lock, Database, DatabaseZap, Network, HeartPulse,
   Package, Rocket, Blocks, Cloud,
+  FolderOpen, UserCheck, Shield, ShieldCheck,
 };
 
 const statusColors = {

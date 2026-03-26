@@ -4,9 +4,16 @@ export const stage5K8sCore: Stage = {
   id: "stage-5",
   number: 5,
   title: "Kubernetes Core",
-  description: "Learn the fundamental building blocks of Kubernetes: Pods, Deployments, and Services.",
+  description:
+    "Learn the fundamental building blocks of Kubernetes: Pods, Deployments, and Services.",
   icon: "Hexagon",
   unlockedBy: "stage-4",
+  narrative: {
+    intro:
+      "The team has decided to adopt Kubernetes. Your first task: deploy NovaCraft's web application on a K8s cluster. You'll need to understand Pods, Deployments, and Services — the core building blocks that everything else is built on.",
+    context:
+      "Deploy the web app using Kubernetes Pods, Deployments, and Services.",
+  },
   lessons: [
     {
       id: "5-1",
@@ -23,6 +30,21 @@ Key K8s concepts we'll cover:
   - Pod: the smallest deployable unit (wraps one or more containers)
   - Deployment: manages replicas of Pods
   - Service: provides stable network access to Pods`,
+      quiz: [
+        {
+          question:
+            "How does Kubernetes differ from running Docker commands manually?",
+          options: [
+            "Kubernetes uses a different container format",
+            "You declare the desired state and K8s maintains it automatically",
+            "Kubernetes doesn't use containers at all",
+            "Kubernetes only works on Linux",
+          ],
+          correctIndex: 1,
+          explanation:
+            "Kubernetes is declarative: you describe what you want (e.g., 3 replicas), and K8s continuously ensures reality matches your declaration — restarting crashed pods, scaling, etc.",
+        },
+      ],
     },
     {
       id: "5-2",
@@ -40,7 +62,25 @@ Pods are identified by labels -- key-value pairs:
     app: web
     environment: production
 
-Labels are how other K8s resources find and connect to pods.`,
+Labels are how other K8s resources find and connect to pods.
+
+[deep-dive: Pod networking under the hood]
+Every Pod gets its own IP address within the cluster. Containers inside the same Pod share a network namespace — they can talk to each other via localhost. But Pods on different nodes communicate through a cluster-wide virtual network (CNI plugin). This flat network means any Pod can reach any other Pod by IP, regardless of which node it runs on.
+[/deep-dive]`,
+      quiz: [
+        {
+          question: "What do labels on a Pod do?",
+          options: [
+            "They set environment variables",
+            "They control which node the Pod runs on",
+            "They let other resources (like Services) find and connect to the Pod",
+            "They limit the Pod's memory usage",
+          ],
+          correctIndex: 2,
+          explanation:
+            "Labels are key-value pairs that act as identifiers. Services and Deployments use label selectors to find the right Pods.",
+        },
+      ],
     },
     {
       id: "5-3",
@@ -60,6 +100,21 @@ A Deployment uses a "selector" to know which Pods it manages:
       app: web
 
 This means "manage all Pods with label app=web".`,
+      quiz: [
+        {
+          question:
+            "Why do you create a Deployment instead of individual Pods?",
+          options: [
+            "Pods can't run containers",
+            "Deployments manage replicas, handle crashes, and enable rolling updates",
+            "Deployments are faster than Pods",
+            "Pods don't support labels",
+          ],
+          correctIndex: 1,
+          explanation:
+            "A Deployment ensures the right number of Pods are always running, replaces crashed ones, and handles zero-downtime updates — things raw Pods can't do on their own.",
+        },
+      ],
     },
     {
       id: "5-4",
@@ -98,13 +153,6 @@ Now build a K8s architecture!`,
           validations: [
             {
               nodeType: "deployment",
-              field: "name",
-              operator: "exists",
-              value: true,
-              message: "Deployment needs a name.",
-            },
-            {
-              nodeType: "deployment",
               field: "replicas",
               operator: "gt",
               value: 0,
@@ -115,7 +163,8 @@ Now build a K8s architecture!`,
               field: "image",
               operator: "exists",
               value: true,
-              message: "Deployment needs a container image (e.g., 'nginx:latest').",
+              message:
+                "Deployment needs a container image (e.g., 'nginx:latest').",
             },
             {
               nodeType: "deployment",
@@ -136,17 +185,11 @@ Now build a K8s architecture!`,
           validations: [
             {
               nodeType: "service",
-              field: "name",
-              operator: "exists",
-              value: true,
-              message: "Service needs a name.",
-            },
-            {
-              nodeType: "service",
               field: "selector",
               operator: "exists",
               value: true,
-              message: "Service needs a selector that matches the Deployment (e.g., 'app=web').",
+              message:
+                "Service needs a selector that matches the Deployment (e.g., 'app=web').",
             },
             {
               nodeType: "service",
@@ -167,17 +210,11 @@ Now build a K8s architecture!`,
           validations: [
             {
               nodeType: "pod",
-              field: "name",
-              operator: "exists",
-              value: true,
-              message: "Pod needs a name (e.g., 'web-pod').",
-            },
-            {
-              nodeType: "pod",
               field: "labels",
               operator: "exists",
               value: true,
-              message: "Pod needs labels matching the Deployment selector (e.g., 'app=web').",
+              message:
+                "Pod needs labels matching the Deployment selector (e.g., 'app=web').",
             },
           ],
           successMessage: "Deployment is managing Pods!",
@@ -187,6 +224,63 @@ Now build a K8s architecture!`,
         "Create a Deployment: set name, replicas (e.g., 2), image (e.g., 'nginx:latest'), and selector (e.g., 'app=web').",
         "Create a Service: set the same selector as the Deployment so it can find the pods. Set port to 80. Connect Deployment → Service.",
         "Add a Pod with a name and labels matching your selector (e.g., 'app=web'). Connect Deployment → Pod to show it manages the pod.",
+      ],
+      maxStars: 3,
+    },
+    {
+      id: "challenge-5-2",
+      title: "kubectl Basics",
+      type: "terminal",
+      description:
+        "Use kubectl to explore a Kubernetes cluster. List resources, inspect pods, and view logs -- the essential skills for any K8s operator.",
+      terminalFiles: {
+        "deployment.yaml":
+          "apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: web-deployment\nspec:\n  replicas: 2\n  selector:\n    matchLabels:\n      app: web\n  template:\n    metadata:\n      labels:\n        app: web\n    spec:\n      containers:\n      - name: web\n        image: nginx:latest\n        ports:\n        - containerPort: 80",
+        "service.yaml":
+          "apiVersion: v1\nkind: Service\nmetadata:\n  name: web-service\nspec:\n  selector:\n    app: web\n  ports:\n  - port: 80\n    targetPort: 80\n  type: ClusterIP",
+      },
+      terminalTasks: [
+        {
+          id: "t5-1",
+          instruction: "List all running pods with `kubectl get pods`",
+          validation: {
+            type: "command_match",
+            pattern: "kubectl\\s+get\\s+pods?",
+          },
+          successMessage:
+            "kubectl get pods shows all pods with their status, restarts, and age!",
+        },
+        {
+          id: "t5-2",
+          instruction: "List all services with `kubectl get services`",
+          validation: {
+            type: "command_match",
+            pattern: "kubectl\\s+get\\s+(services?|svc)",
+          },
+          successMessage:
+            "Services provide stable network endpoints for your pods!",
+        },
+        {
+          id: "t5-3",
+          instruction:
+            "Inspect a pod in detail: `kubectl describe pod web-deployment-7d4f8b6c9-x2k4l`",
+          validation: { type: "command_match", pattern: "kubectl\\s+describe" },
+          successMessage:
+            "kubectl describe shows detailed info: events, containers, volumes, and more!",
+        },
+        {
+          id: "t5-4",
+          instruction: "View the deployment YAML file: `cat deployment.yaml`",
+          validation: { type: "output_contains", pattern: "apiVersion" },
+          successMessage:
+            "Kubernetes resources are defined as YAML manifests. This Deployment creates 2 replicas of nginx!",
+        },
+      ],
+      hints: [
+        "kubectl commands follow the pattern: kubectl <action> <resource>",
+        "Common actions: get (list), describe (details), apply (create/update), delete, logs",
+        "You can use short names: pods/po, services/svc, deployments/deploy",
+        "The YAML manifest defines the desired state that Kubernetes maintains.",
       ],
       maxStars: 3,
     },

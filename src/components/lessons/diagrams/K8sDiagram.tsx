@@ -6,13 +6,13 @@ import { AnimatedBox, AnimatedArrow, PulsingDot } from "./AnimatedBox";
 export function K8sIntroDiagram() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-3"
     >
       <div className="flex items-center justify-center gap-3">
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.97 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, type: "spring" }}
           className="flex flex-col items-center gap-1 px-4 py-3 rounded-lg border border-zinc-700 bg-zinc-800/50"
@@ -26,7 +26,7 @@ export function K8sIntroDiagram() {
         <AnimatedArrow delay={0.6} />
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.97 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.8, type: "spring" }}
           className="flex flex-col items-center gap-1 px-4 py-3 rounded-lg border border-zinc-700 bg-zinc-800/50"
@@ -36,7 +36,7 @@ export function K8sIntroDiagram() {
             {[1, 2, 3].map((i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 0 }}
+                initial={{ opacity: 0, scale: 0.3 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1.0 + i * 0.15, type: "spring" }}
                 className="w-6 h-6 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center"
@@ -63,12 +63,12 @@ export function K8sIntroDiagram() {
 export function PodDiagram() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex items-center justify-center"
     >
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2, type: "spring" }}
         className="relative p-4 rounded-xl border-2 border-dashed border-indigo-500/30 bg-indigo-500/5"
@@ -76,7 +76,7 @@ export function PodDiagram() {
         <span className="absolute -top-2.5 left-3 px-1.5 bg-zinc-950 text-[10px] text-indigo-400 font-semibold">Pod</span>
         <div className="flex items-center gap-3">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 3 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
             className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg border border-cyan-500/30 bg-cyan-500/5"
@@ -86,7 +86,7 @@ export function PodDiagram() {
             <span className="text-[9px] text-zinc-600">:80</span>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 3 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
             className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg border border-amber-500/30 bg-amber-500/5"
@@ -115,12 +115,12 @@ export function PodDiagram() {
 export function DeploymentDiagram() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex flex-col items-center gap-2"
     >
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2, type: "spring" }}
         className="relative px-5 py-3 rounded-xl border-2 border-purple-500/30 bg-purple-500/5"
@@ -132,7 +132,7 @@ export function DeploymentDiagram() {
           {[1, 2, 3].map((i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, scale: 0.5 }}
+              initial={{ opacity: 0, scale: 0.7 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5 + i * 0.2, type: "spring" }}
               className="px-3 py-2 rounded-lg border border-indigo-500/30 bg-indigo-500/5 flex flex-col items-center gap-0.5"
@@ -162,7 +162,7 @@ export function DeploymentDiagram() {
 export function ServiceDiagram() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex flex-col items-center gap-2"
     >
@@ -184,7 +184,7 @@ export function ServiceDiagram() {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.5, type: "spring" }}
         className="px-4 py-2 rounded-lg border border-emerald-500/30 bg-emerald-500/5 text-center"
@@ -214,7 +214,7 @@ export function ServiceDiagram() {
         {["Pod 1", "Pod 2", "Pod 3"].map((pod, i) => (
           <motion.div
             key={pod}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 3 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2 + i * 0.1 }}
             className="px-2 py-1 rounded border border-indigo-500/30 bg-indigo-500/5 text-[9px] text-indigo-400"

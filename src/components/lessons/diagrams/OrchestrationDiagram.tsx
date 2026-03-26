@@ -14,7 +14,7 @@ export function WhyOrchestration() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-3"
     >
@@ -22,7 +22,7 @@ export function WhyOrchestration() {
         {problems.map((p) => (
           <motion.div
             key={p.label}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 3 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: p.delay, type: "spring", damping: 15 }}
             className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-zinc-700 bg-zinc-800/50"
@@ -48,7 +48,7 @@ export function WhyOrchestration() {
 export function LoadBalancerDiagram() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex flex-col items-center gap-2"
     >
@@ -93,7 +93,7 @@ export function LoadBalancerDiagram() {
               </circle>
             </svg>
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1.0 + i * 0.15, type: "spring" }}
               className="px-2 py-1.5 rounded border border-emerald-500/30 bg-emerald-500/5 text-[10px] text-emerald-400"
@@ -110,12 +110,12 @@ export function LoadBalancerDiagram() {
 export function HealthCheckDiagram() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex items-center justify-center gap-3"
     >
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
+        initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2, type: "spring" }}
         className="flex flex-col items-center gap-1.5 px-4 py-3 rounded-lg border border-zinc-700 bg-zinc-800/50"
@@ -133,7 +133,7 @@ export function HealthCheckDiagram() {
 
       <div className="flex flex-col gap-2">
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
+          initial={{ opacity: 0, x: 4 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.6 }}
           className="flex items-center gap-2"
@@ -145,7 +145,7 @@ export function HealthCheckDiagram() {
           <div className="flex items-center gap-1 px-2 py-1 rounded bg-emerald-500/10 border border-emerald-500/20">
             <motion.div
               className="w-1.5 h-1.5 rounded-full bg-emerald-500"
-              animate={{ scale: [1, 1.4, 1] }}
+              animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 1.5, repeat: Infinity }}
             />
             <span className="text-[10px] text-emerald-400">200 OK</span>
@@ -153,7 +153,7 @@ export function HealthCheckDiagram() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
+          initial={{ opacity: 0, x: 4 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 1.0 }}
           className="flex items-center gap-2"

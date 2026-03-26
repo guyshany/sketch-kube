@@ -4,9 +4,16 @@ export const stage2Processes: Stage = {
   id: "stage-2",
   number: 2,
   title: "Processes & Services",
-  description: "Understand what processes are, how services work, and how they communicate through network ports.",
+  description:
+    "Understand what processes are, how services work, and how they communicate through network ports.",
   icon: "Cpu",
   unlockedBy: "stage-1",
+  narrative: {
+    intro:
+      "NovaCraft's backend runs several services — a web server, a database, and a cache. Your team lead asks you to understand how these services run as processes and communicate over the network. Time to learn how the pieces connect.",
+    context:
+      "Understand how services run as processes and communicate through network ports.",
+  },
   lessons: [
     {
       id: "2-1",
@@ -84,15 +91,7 @@ In the challenge, you'll build a simple client-server setup on the canvas.`,
           description: "A server process with a name must exist",
           entryPoint: "process",
           expectedPath: ["process"],
-          validations: [
-            {
-              nodeType: "process",
-              field: "name",
-              operator: "exists",
-              value: true,
-              message: "The Process needs a name (e.g., 'nginx').",
-            },
-          ],
+          validations: [],
           successMessage: "Server process is configured!",
         },
         {
@@ -125,6 +124,47 @@ In the challenge, you'll build a simple client-server setup on the canvas.`,
       hints: [
         "Add a Process component and give it a name like 'nginx' or 'web-server'.",
         "Add a Port component, set the port number (e.g., 80), and connect the Process to the Port.",
+      ],
+      maxStars: 3,
+    },
+    {
+      id: "challenge-2-2",
+      title: "Explore Processes",
+      type: "terminal",
+      description:
+        "Use terminal commands to inspect running processes and network ports, just like a real system administrator.",
+      terminalFiles: {
+        "server.js":
+          'const http = require("http");\nhttp.createServer((req, res) => {\n  res.writeHead(200);\n  res.end("OK");\n}).listen(3000);\nconsole.log("Server running on port 3000");',
+      },
+      terminalTasks: [
+        {
+          id: "t2-1",
+          instruction: "List running processes with `ps aux`",
+          validation: { type: "command_match", pattern: "ps\\s+aux" },
+          successMessage:
+            "You can see all running processes with their PID, CPU, and memory usage!",
+        },
+        {
+          id: "t2-2",
+          instruction:
+            "Check which services are listening on ports: `netstat -tulpn`",
+          validation: { type: "command_match", pattern: "netstat" },
+          successMessage:
+            "netstat shows you which processes are listening on which ports!",
+        },
+        {
+          id: "t2-3",
+          instruction: "Filter for a specific port: `netstat -tulpn | grep 80`",
+          validation: { type: "output_contains", pattern: "80" },
+          successMessage:
+            "Combining netstat with grep lets you find specific services quickly!",
+        },
+      ],
+      hints: [
+        "Type the commands exactly as shown.",
+        "The ps command shows processes; netstat shows network connections.",
+        "Use grep to filter output for specific patterns.",
       ],
       maxStars: 3,
     },

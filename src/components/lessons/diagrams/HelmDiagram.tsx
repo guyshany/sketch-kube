@@ -7,7 +7,7 @@ export function HelmProblemDiagram() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-3"
     >
@@ -15,7 +15,7 @@ export function HelmProblemDiagram() {
         {resources.map((r, i) => (
           <motion.div
             key={r}
-            initial={{ opacity: 0, y: 10, rotate: -5 + Math.random() * 10 }}
+            initial={{ opacity: 0, y: 4, rotate: -5 + Math.random() * 10 }}
             animate={{ opacity: 1, y: 0, rotate: 0 }}
             transition={{ delay: 0.1 + i * 0.1, type: "spring" }}
             className="px-2 py-1 rounded border border-zinc-700 bg-zinc-800/50 text-[10px] text-zinc-400 font-mono"
@@ -33,7 +33,7 @@ export function HelmProblemDiagram() {
         Managing {resources.length} YAML files per app × environments = chaos
       </motion.div>
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 1.2, type: "spring" }}
         className="flex items-center justify-center"
@@ -67,7 +67,7 @@ export function ChartStructureDiagram() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex items-start justify-center gap-6"
     >
@@ -75,7 +75,7 @@ export function ChartStructureDiagram() {
         {files.map((f) => (
           <motion.div
             key={f.name}
-            initial={{ opacity: 0, x: -10 }}
+            initial={{ opacity: 0, x: -3 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: f.delay }}
             className="flex items-center"
@@ -115,12 +115,12 @@ export function ChartStructureDiagram() {
 export function HelmReleaseDiagram() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex flex-col items-center gap-2"
     >
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2, type: "spring" }}
         className="px-4 py-2 rounded-lg border border-purple-500/30 bg-purple-500/5 text-center"
@@ -145,7 +145,7 @@ export function HelmReleaseDiagram() {
         ].map((r, i) => (
           <motion.div
             key={r.env}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 3 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 + i * 0.2, type: "spring" }}
             className={`flex flex-col items-center gap-0.5 px-4 py-2 rounded-lg border ${r.color}`}

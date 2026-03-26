@@ -12,7 +12,7 @@ export function ProcessIntro() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-3"
     >
@@ -25,7 +25,7 @@ export function ProcessIntro() {
         {processes.map((proc, i) => (
           <motion.div
             key={proc.pid}
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -4 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 + i * 0.2 }}
             className={`flex items-center gap-2 px-3 py-2 border-b border-zinc-800/50 ${proc.color}`}
@@ -64,13 +64,13 @@ export function PortDiagram() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-3"
     >
       <div className="flex items-center justify-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, type: "spring" }}
           className="relative w-40 h-40 rounded-xl border-2 border-dashed border-zinc-700 bg-zinc-900/50 flex items-center justify-center"
@@ -84,7 +84,7 @@ export function PortDiagram() {
             return (
               <motion.div
                 key={p.port}
-                initial={{ opacity: 0, scale: 0 }}
+                initial={{ opacity: 0, scale: 0.3 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5 + i * 0.15, type: "spring", damping: 12 }}
                 className={`absolute flex flex-col items-center gap-0.5 px-2 py-1 rounded border bg-zinc-900 ${p.color}`}
@@ -104,7 +104,7 @@ export function PortDiagram() {
 export function ClientServerDiagram() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 3 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex flex-col items-center gap-2"
     >
