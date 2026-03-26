@@ -11,6 +11,7 @@ export const stage6Networking: Stage = {
     {
       id: "6-1",
       title: "Service Types Deep Dive",
+      diagram: "service-types",
       content: `In the previous stage, you created a ClusterIP service. Let's explore all service types:
 
 ClusterIP (default):
@@ -31,6 +32,7 @@ LoadBalancer:
     {
       id: "6-2",
       title: "Ingress: HTTP Routing",
+      diagram: "ingress-diagram",
       content: `For HTTP/HTTPS traffic, Ingress is the best option. It provides:
 
   - Host-based routing: api.example.com → API service
@@ -50,6 +52,7 @@ The Ingress resource just defines rules:
     {
       id: "6-3",
       title: "Putting It Together",
+      diagram: "full-stack",
       content: `A typical production setup looks like:
 
   [Internet]

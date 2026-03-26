@@ -6,6 +6,7 @@ import { useLessonStore } from "@/lib/store/lesson-store";
 import { useProgressStore } from "@/lib/store/progress-store";
 import type { Stage } from "@/types/stages";
 import SimulationRunner from "@/components/simulation/SimulationRunner";
+import { DiagramRenderer } from "@/components/lessons/diagrams";
 
 interface LessonDrawerProps {
   stage: Stage;
@@ -51,7 +52,7 @@ export default function LessonDrawer({ stage }: LessonDrawerProps) {
     <div
       className={cn(
         "border-t border-zinc-800 bg-zinc-900/80 backdrop-blur-sm transition-all duration-300",
-        drawerOpen ? "h-72" : "h-10",
+        drawerOpen ? "h-80" : "h-10",
       )}
     >
       <button
@@ -112,8 +113,15 @@ export default function LessonDrawer({ stage }: LessonDrawerProps) {
               <h3 className="text-sm font-semibold text-zinc-200">
                 {currentLesson.title}
               </h3>
-              <div className="text-sm text-zinc-400 leading-relaxed whitespace-pre-line">
-                {currentLesson.content}
+              <div className="flex gap-4">
+                <div className="flex-1 text-sm text-zinc-400 leading-relaxed whitespace-pre-line">
+                  {currentLesson.content}
+                </div>
+                {currentLesson.diagram && (
+                  <div className="flex-1 flex items-start justify-center pt-1">
+                    <DiagramRenderer diagramId={currentLesson.diagram} />
+                  </div>
+                )}
               </div>
               <div className="flex items-center justify-between pt-2">
                 <button

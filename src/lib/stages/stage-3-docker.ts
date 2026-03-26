@@ -11,6 +11,7 @@ export const stage3Docker: Stage = {
     {
       id: "3-1",
       title: "The Problem: 'It Works on My Machine'",
+      diagram: "works-on-my-machine",
       content: `Imagine you build a web app on your laptop. It works great! But when you deploy it to a server, it crashes.
 
 Why? Because the server has:
@@ -24,6 +25,7 @@ This is the "it works on my machine" problem. Docker solves it.`,
     {
       id: "3-2",
       title: "Docker Images",
+      diagram: "docker-image",
       content: `A Docker Image is like a snapshot of a complete environment:
   - The operating system (e.g., Ubuntu, Alpine)
   - Your application code
@@ -46,6 +48,7 @@ An image is read-only. It's the blueprint, not the running thing.`,
     {
       id: "3-3",
       title: "Docker Containers",
+      diagram: "container-diagram",
       content: `A Container is a running instance of an Image. Like how a process is a running instance of a program.
 
   Image → Container  (like  Class → Object)
@@ -65,6 +68,7 @@ The "-p 8080:80" maps host port 8080 to container port 80.`,
     {
       id: "3-4",
       title: "Volumes: Persistent Storage",
+      diagram: "volume-diagram",
       content: `Containers are ephemeral -- when they stop, their data is gone. But sometimes you need data to persist (database files, logs, uploads).
 
 Volumes solve this by mounting a directory from the host into the container:

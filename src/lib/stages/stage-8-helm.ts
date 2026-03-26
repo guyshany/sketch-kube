@@ -11,6 +11,7 @@ export const stage8Helm: Stage = {
     {
       id: "8-1",
       title: "The Problem Helm Solves",
+      diagram: "helm-problem",
       content: `By now you've seen that a single application needs many K8s resources:
   - Deployment
   - Service
@@ -30,6 +31,7 @@ Helm is "the package manager for Kubernetes". It bundles K8s resources into a Ch
     {
       id: "8-2",
       title: "Charts, Templates & Values",
+      diagram: "chart-structure",
       content: `A Helm Chart is a directory with:
 
   mychart/
@@ -57,6 +59,7 @@ Different environments use different values:
     {
       id: "8-3",
       title: "Helm Releases",
+      diagram: "helm-release",
       content: `When you install a Chart, you create a Release:
 
   helm install my-app ./mychart -f values-prod.yaml

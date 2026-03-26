@@ -11,6 +11,7 @@ export const stage9IaC: Stage = {
     {
       id: "9-1",
       title: "What is Infrastructure as Code?",
+      diagram: "iac-intro",
       content: `So far, we've defined infrastructure using YAML and CLI commands. Infrastructure as Code (IaC) takes this further:
 
 Instead of manually creating resources, you write code that describes your infrastructure. The IaC tool then creates, updates, or destroys resources to match your code.
@@ -31,6 +32,7 @@ Popular IaC tools:
     {
       id: "9-2",
       title: "Pulumi: Code, Not Config",
+      diagram: "pulumi-code",
       content: `Pulumi stands out because you use real programming languages (TypeScript, Python, Go) instead of custom DSLs.
 
 This means you can:
@@ -62,6 +64,7 @@ Example (TypeScript):
     {
       id: "9-3",
       title: "Stacks & Providers",
+      diagram: "stack-provider",
       content: `Pulumi organizes infrastructure into:
 
 Stacks: isolated instances of your infrastructure

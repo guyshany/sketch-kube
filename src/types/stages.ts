@@ -5,6 +5,7 @@ export interface Lesson {
   id: string;
   title: string;
   content: string;
+  diagram?: string;
 }
 
 export interface Validation {

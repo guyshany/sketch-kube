@@ -11,6 +11,7 @@ export const stage7Storage: Stage = {
     {
       id: "7-1",
       title: "ConfigMaps",
+      diagram: "configmap-diagram",
       content: `Applications need configuration: database URLs, feature flags, API keys.
 
 Hardcoding config inside container images is bad practice. ConfigMaps let you separate config from code.
@@ -32,6 +33,7 @@ When you update a ConfigMap, pods can pick up the new values without rebuilding 
     {
       id: "7-2",
       title: "Secrets",
+      diagram: "secret-diagram",
       content: `Secrets are like ConfigMaps, but for sensitive data:
   - Passwords
   - API tokens
@@ -53,6 +55,7 @@ Never commit Secrets to git!`,
     {
       id: "7-3",
       title: "Persistent Volumes",
+      diagram: "pv-diagram",
       content: `Kubernetes Pods are ephemeral. When a Pod restarts, local data is lost.
 
 For databases and stateful apps, you need Persistent Volumes (PV):

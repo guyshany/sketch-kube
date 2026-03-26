@@ -11,6 +11,7 @@ export const stage2Processes: Stage = {
     {
       id: "2-1",
       title: "What is a Process?",
+      diagram: "process-intro",
       content: `When you run a command, the operating system creates a "process" -- a running instance of a program.
 
 Each process gets:
@@ -30,6 +31,7 @@ Examples of services:
     {
       id: "2-2",
       title: "Network Ports",
+      diagram: "port-diagram",
       content: `Services need a way for other programs to talk to them. They do this by "listening" on a network port.
 
 A port is like a numbered door on your computer:
@@ -49,6 +51,7 @@ Only one process can listen on a given port at a time. If you try to start two w
     {
       id: "2-3",
       title: "Client-Server Communication",
+      diagram: "client-server",
       content: `Most services follow the client-server model:
 
 1. The SERVER starts and listens on a port

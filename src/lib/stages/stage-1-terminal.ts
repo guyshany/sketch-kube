@@ -11,6 +11,7 @@ export const stage1Terminal: Stage = {
     {
       id: "1-1",
       title: "What is a Terminal?",
+      diagram: "terminal-intro",
       content: `A terminal (or command line) is a text-based interface to your computer. Instead of clicking buttons and icons, you type commands.
 
 Think of it like talking directly to your computer. You type a command, press Enter, and the computer responds with text output.
@@ -25,6 +26,7 @@ The dollar sign means the shell is ready for your input.`,
     {
       id: "1-2",
       title: "Running Commands",
+      diagram: "command-structure",
       content: `A command has three parts:
 1. The command name (e.g., "ls", "echo", "cat")
 2. Options/flags (e.g., "-l", "--help")
@@ -46,6 +48,7 @@ And every command returns an exit code:
     {
       id: "1-3",
       title: "Pipes: Connecting Commands",
+      diagram: "pipe-diagram",
       content: `The real power of the terminal comes from connecting commands together using pipes ( | ).
 
 A pipe takes the output of one command and feeds it as input to the next command.

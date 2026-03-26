@@ -11,6 +11,7 @@ export const stage4Orchestration: Stage = {
     {
       id: "4-1",
       title: "Why Orchestration?",
+      diagram: "why-orchestration",
       content: `Running a single container is easy. But in production you need:
 
   - Multiple copies for reliability (if one crashes, others keep serving)
@@ -26,6 +27,7 @@ Kubernetes is the most popular orchestrator, but the concepts apply everywhere.`
     {
       id: "4-2",
       title: "Scaling & Load Balancing",
+      diagram: "load-balancer",
       content: `Scaling means running multiple identical copies of your container (replicas).
 
 Instead of one container handling all traffic:
@@ -44,6 +46,7 @@ The load balancer distributes incoming requests across replicas using algorithms
     {
       id: "4-3",
       title: "Health Checks",
+      diagram: "health-check",
       content: `How do you know if a container is working properly? Health checks!
 
 A health check periodically pings your container:

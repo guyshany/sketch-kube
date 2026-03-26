@@ -11,6 +11,7 @@ export const stage5K8sCore: Stage = {
     {
       id: "5-1",
       title: "Enter Kubernetes",
+      diagram: "k8s-intro",
       content: `Kubernetes (K8s) is the industry standard for container orchestration. It automates deploying, scaling, and managing containerized applications.
 
 K8s organizes everything into "resources" described by YAML manifests. Instead of running commands, you declare the desired state and K8s makes it happen.
@@ -26,6 +27,7 @@ Key K8s concepts we'll cover:
     {
       id: "5-2",
       title: "Pods",
+      diagram: "pod-diagram",
       content: `A Pod is the smallest unit you can deploy in Kubernetes. It wraps one or more containers that share:
   - The same network (they can talk via localhost)
   - The same storage volumes
@@ -43,6 +45,7 @@ Labels are how other K8s resources find and connect to pods.`,
     {
       id: "5-3",
       title: "Deployments",
+      diagram: "deployment-diagram",
       content: `You rarely create Pods directly. Instead, you create a Deployment.
 
 A Deployment manages Pods for you:
@@ -61,6 +64,7 @@ This means "manage all Pods with label app=web".`,
     {
       id: "5-4",
       title: "Services",
+      diagram: "service-diagram",
       content: `Pods get random IP addresses that change when pods restart. So how do other things find your pods?
 
 A Service provides a stable address. It uses selectors to find pods:
