@@ -47,23 +47,29 @@ export default function QuizCard({ questions, onComplete }: QuizCardProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 6 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="mt-6 rounded-xl border border-indigo-500/20 bg-indigo-500/5 p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
+      className="rounded-2xl border border-zinc-800 bg-zinc-900/80 p-6"
     >
-      <div className="flex items-center gap-2 mb-3">
-        <HelpCircle className="w-4 h-4 text-indigo-400" />
-        <span className="text-xs text-indigo-400 font-medium uppercase tracking-wider">
-          Knowledge Check{questions.length > 1 ? ` (${currentQ + 1}/${questions.length})` : ""}
+      <div className="flex items-center gap-2 mb-5">
+        <HelpCircle className="w-5 h-5 text-indigo-400" />
+        <span className="text-sm text-indigo-400 font-medium uppercase tracking-wider">
+          Knowledge Check
         </span>
+        {questions.length > 1 && (
+          <span className="ml-auto text-xs text-zinc-500 tabular-nums">
+            {currentQ + 1} of {questions.length}
+          </span>
+        )}
       </div>
 
-      <p className="text-sm text-zinc-200 font-medium mb-3">{question.question}</p>
+      <p className="text-base text-zinc-100 font-semibold mb-4 leading-snug">{question.question}</p>
 
       <motion.div
-        animate={shake ? { x: [0, -6, 6, -4, 4, 0] } : {}}
-        transition={{ duration: 0.4 }}
-        className="space-y-2"
+        animate={shake ? { x: [0, -4, 4, -3, 3, 0] } : {}}
+        transition={{ duration: 0.35 }}
+        className="space-y-3"
       >
         {question.options.map((option, i) => {
           const isThis = selected === i;
@@ -71,7 +77,7 @@ export default function QuizCard({ questions, onComplete }: QuizCardProps) {
           let style = "border-zinc-700 bg-zinc-800/50 text-zinc-300 hover:border-zinc-500 hover:bg-zinc-800";
 
           if (answered && isRight) {
-            style = "border-emerald-500/50 bg-emerald-500/10 text-emerald-400";
+            style = "border-emerald-500/50 bg-emerald-500/10 text-emerald-300";
           } else if (isThis && !answered) {
             style = "border-red-500/50 bg-red-500/10 text-red-400";
           }
@@ -82,18 +88,18 @@ export default function QuizCard({ questions, onComplete }: QuizCardProps) {
               onClick={() => handleSelect(i)}
               disabled={answered}
               className={cn(
-                "w-full text-left px-3 py-2 rounded-lg border text-sm transition-all",
+                "w-full text-left px-4 py-2.5 rounded-lg border text-sm transition-all",
                 style,
                 answered && "cursor-default",
               )}
             >
-              <div className="flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full border border-current flex items-center justify-center text-[10px] font-bold shrink-0">
+              <div className="flex items-center gap-2.5">
+                <span className="w-6 h-6 rounded-full border border-current flex items-center justify-center text-[10px] font-bold shrink-0">
                   {String.fromCharCode(65 + i)}
                 </span>
                 <span>{option}</span>
-                {answered && isRight && <CheckCircle2 className="w-4 h-4 ml-auto text-emerald-500 shrink-0" />}
-                {isThis && !isCorrect && !answered && <XCircle className="w-4 h-4 ml-auto text-red-500 shrink-0" />}
+                {answered && isRight && <CheckCircle2 className="w-5 h-5 ml-auto text-emerald-500 shrink-0" />}
+                {isThis && !isCorrect && !answered && <XCircle className="w-5 h-5 ml-auto text-red-500 shrink-0" />}
               </div>
             </button>
           );
@@ -108,12 +114,12 @@ export default function QuizCard({ questions, onComplete }: QuizCardProps) {
             exit={{ opacity: 0, height: 0 }}
             className="overflow-hidden"
           >
-            <div className="mt-3 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+            <div className="mt-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
               <p className="text-xs text-emerald-400 leading-relaxed">{question.explanation}</p>
             </div>
             <button
               onClick={handleContinue}
-              className="mt-3 px-4 py-2 rounded-lg text-sm font-medium bg-indigo-600 hover:bg-indigo-500 text-white transition-colors"
+              className="mt-3 w-full px-4 py-2.5 rounded-lg text-sm font-medium bg-indigo-600 hover:bg-indigo-500 text-white transition-colors"
             >
               {isLast ? "Continue" : "Next Question"}
             </button>

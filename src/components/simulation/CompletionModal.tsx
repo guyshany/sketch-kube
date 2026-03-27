@@ -8,6 +8,13 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { stages } from "@/lib/stages";
 
+const avatarColorMap: Record<string, string> = {
+  indigo: "bg-indigo-500",
+  cyan: "bg-cyan-500",
+  violet: "bg-violet-500",
+  amber: "bg-amber-500",
+};
+
 interface CompletionModalProps {
   visible: boolean;
   stars: number;
@@ -40,7 +47,11 @@ export default function CompletionModal({
   }, [visible]);
 
   const currentStageIndex = stages.findIndex((s) => s.id === stageId);
+  const currentStage = stages[currentStageIndex];
   const nextStage = stages[currentStageIndex + 1];
+  const isLastChallenge = !onNextChallenge;
+  const narrative = currentStage?.narrative;
+  const showDebrief = isLastChallenge && narrative?.debrief;
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -61,7 +72,10 @@ export default function CompletionModal({
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ type: "spring", damping: 20, stiffness: 300 }}
-            className="bg-zinc-900 border border-zinc-700 rounded-2xl p-8 max-w-sm mx-4 text-center shadow-2xl"
+            className={cn(
+              "bg-zinc-900 border border-zinc-700 rounded-2xl p-8 mx-4 text-center shadow-2xl",
+              showDebrief ? "max-w-md" : "max-w-sm",
+            )}
             onClick={(e) => e.stopPropagation()}
           >
             <motion.div
@@ -74,7 +88,7 @@ export default function CompletionModal({
             </motion.div>
 
             <h2 className="text-xl font-bold text-zinc-100 mb-2">
-              Challenge Complete!
+              {showDebrief ? "Stage Complete!" : "Challenge Complete!"}
             </h2>
             <p className="text-sm text-zinc-400 mb-6">
               Great work! You&apos;ve mastered this concept.
@@ -107,6 +121,32 @@ export default function CompletionModal({
                 </motion.div>
               ))}
             </div>
+
+            {showDebrief && narrative && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="mb-6 flex items-start gap-3 text-left px-2 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700/50"
+              >
+                <div
+                  className={cn(
+                    "w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center text-white text-[10px] font-bold",
+                    avatarColorMap[narrative.character.color] ?? "bg-indigo-500",
+                  )}
+                >
+                  {narrative.character.avatar}
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-zinc-300">
+                    {narrative.character.name}
+                  </span>
+                  <p className="text-sm text-zinc-400 mt-1 leading-relaxed">
+                    {narrative.debrief}
+                  </p>
+                </div>
+              </motion.div>
+            )}
 
             <div className="flex flex-col gap-2">
               {onNextChallenge && nextChallengeTitle ? (

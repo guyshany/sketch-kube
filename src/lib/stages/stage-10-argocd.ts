@@ -9,8 +9,10 @@ export const stage10ArgoCD: Stage = {
   icon: "GitBranch",
   unlockedBy: "stage-9",
   narrative: {
-    intro: "NovaCraft's infrastructure is defined as code, but deployments are still triggered manually. The CTO's final ask: adopt GitOps with Argo CD so that pushing to Git automatically deploys to the cluster. This is the capstone — tying together everything you've learned.",
-    context: "Set up Argo CD for automated, Git-driven deployments to Kubernetes.",
+    character: { name: "Maya Chen", role: "CTO", avatar: "MC", color: "indigo" },
+    intro: "This is the capstone. There's one last gap — deployments are still triggered manually. I want push-to-deploy. Everything you've built — containers, K8s, Helm charts, IaC — it all comes together here. We're adopting Argo CD and GitOps: Git is the single source of truth. Push to the repo, Argo CD syncs the cluster. No manual kubectl, no deploy scripts. This is how NovaCraft ships from now on.",
+    context: "Set up Argo CD for automated, Git-driven deployments.",
+    debrief: "You did it. NovaCraft's infrastructure is fully automated — from code to cluster, everything flows through Git. The team can ship with confidence. Welcome to the senior engineering track.",
   },
   lessons: [
     {

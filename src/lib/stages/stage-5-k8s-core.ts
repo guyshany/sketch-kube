@@ -9,10 +9,10 @@ export const stage5K8sCore: Stage = {
   icon: "Hexagon",
   unlockedBy: "stage-4",
   narrative: {
-    intro:
-      "The team has decided to adopt Kubernetes. Your first task: deploy NovaCraft's web application on a K8s cluster. You'll need to understand Pods, Deployments, and Services — the core building blocks that everything else is built on.",
-    context:
-      "Deploy the web app using Kubernetes Pods, Deployments, and Services.",
+    character: { name: "Maya Chen", role: "CTO", avatar: "MC", color: "indigo" },
+    intro: "Manual orchestration won't scale for what's coming — I'm pulling you into the Kubernetes migration directly. The team voted, and K8s is our platform going forward. Your first job: deploy our web app on the cluster. Pods, Deployments, Services — these are the building blocks. Get them right and everything else falls into place.",
+    context: "Deploy the web app on Kubernetes with Pods, Deployments, and Services.",
+    debrief: "The app is running on K8s — milestone moment for NovaCraft. I'm connecting you with Jordan from the SRE team next.",
   },
   lessons: [
     {

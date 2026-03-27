@@ -45,6 +45,14 @@ export default function TopBar({ stage }: TopBarProps) {
           <span className="text-sm font-medium text-zinc-300">
             {stage.title}
           </span>
+          {stage.narrative && (
+            <>
+              <span className="text-zinc-700">|</span>
+              <span className="text-xs text-zinc-500 max-w-xs truncate">
+                {stage.narrative.context}
+              </span>
+            </>
+          )}
         </div>
       )}
 

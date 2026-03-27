@@ -9,9 +9,10 @@ export const stage3Docker: Stage = {
   icon: "Box",
   unlockedBy: "stage-2",
   narrative: {
-    intro:
-      'A new developer just joined NovaCraft and can\'t get the app running on their machine — different OS, missing libraries. The CTO says: "We need to containerize everything." Your job: learn Docker and package the app so it runs identically everywhere.',
-    context: "Containerize NovaCraft's application so it works on any machine.",
+    character: { name: "Alex Rivera", role: "DevOps Lead", avatar: "AR", color: "cyan" },
+    intro: "Here's the problem — getting all our services running on a new dev machine is painful. Priya, the new dev who joined last week, spent two days fighting it. Different Python version, missing native libraries. I told Maya we need to containerize everything, and she agreed. Your mission: learn Docker and package our app so it runs identically on any machine.",
+    context: "Containerize NovaCraft's application using Docker.",
+    debrief: "We're containerized — no more \"works on my machine\" issues. One big step forward for the team.",
   },
   lessons: [
     {

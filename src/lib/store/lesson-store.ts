@@ -7,7 +7,6 @@ interface LessonState {
   hintsRevealed: number;
   mode: "lesson" | "challenge";
   narrativeSeen: boolean;
-  quizAnswered: boolean;
 
   setCurrentLessonIndex: (index: number) => void;
   setCurrentChallengeIndex: (index: number) => void;
@@ -19,7 +18,6 @@ interface LessonState {
   resetHints: () => void;
   setMode: (mode: "lesson" | "challenge") => void;
   setNarrativeSeen: () => void;
-  setQuizAnswered: (answered: boolean) => void;
   reset: () => void;
 }
 
@@ -30,9 +28,8 @@ export const useLessonStore = create<LessonState>((set, get) => ({
   hintsRevealed: 0,
   mode: "lesson",
   narrativeSeen: false,
-  quizAnswered: false,
 
-  setCurrentLessonIndex: (index) => set({ currentLessonIndex: index, quizAnswered: false }),
+  setCurrentLessonIndex: (index) => set({ currentLessonIndex: index }),
   setCurrentChallengeIndex: (index) => set({ currentChallengeIndex: index }),
 
   nextLesson: () =>
@@ -51,7 +48,6 @@ export const useLessonStore = create<LessonState>((set, get) => ({
 
   setMode: (mode) => set({ mode }),
   setNarrativeSeen: () => set({ narrativeSeen: true }),
-  setQuizAnswered: (answered) => set({ quizAnswered: answered }),
 
   reset: () =>
     set({
@@ -61,6 +57,5 @@ export const useLessonStore = create<LessonState>((set, get) => ({
       hintsRevealed: 0,
       mode: "lesson",
       narrativeSeen: false,
-      quizAnswered: false,
     }),
 }));

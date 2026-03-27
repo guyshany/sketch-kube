@@ -9,10 +9,10 @@ export const stage9IaC: Stage = {
   icon: "Blocks",
   unlockedBy: "stage-8",
   narrative: {
-    intro:
-      "NovaCraft is growing fast and the infrastructure is getting complex — multiple clusters, cloud resources, databases. The CTO wants infrastructure changes to go through code review, just like application code. Enter Infrastructure as Code with Pulumi.",
-    context:
-      "Define and manage cloud infrastructure using real programming languages.",
+    character: { name: "Maya Chen", role: "CTO", avatar: "MC", color: "indigo" },
+    intro: "I've been pushing for this since day one. Infrastructure changes should go through pull requests, just like application code — reviewed, versioned, and reproducible. No more clicking around in cloud consoles. With Pulumi, you write infrastructure in real programming languages — TypeScript, Python — with proper type checking and tests. This is how serious teams operate.",
+    context: "Define and manage cloud infrastructure as code with Pulumi.",
+    debrief: "Infrastructure is code. Finally. We're almost there — one more piece to go.",
   },
   lessons: [
     {

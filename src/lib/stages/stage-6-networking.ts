@@ -9,10 +9,10 @@ export const stage6Networking: Stage = {
   icon: "Globe",
   unlockedBy: "stage-5",
   narrative: {
-    intro:
-      "NovaCraft's app is running on Kubernetes, but it's only accessible inside the cluster. The product team needs it reachable from the internet — with a proper domain name and HTTPS. Time to learn K8s networking and expose your services to the world.",
-    context:
-      "Make the application accessible from the internet via Ingress and external services.",
+    character: { name: "Jordan Kim", role: "Senior SRE", avatar: "JK", color: "violet" },
+    intro: "Hey, Jordan here — Senior SRE. Maya told me you got the app running on K8s, nice work. But here's the issue: it's stuck inside the cluster. The product team is breathing down my neck — they need it live on the internet with a proper domain and HTTPS before the launch. I need your help setting up Ingress and getting traffic flowing.",
+    context: "Expose the application to the internet with Ingress and DNS.",
+    debrief: "We're live — traffic is flowing, the domain works, HTTPS is green. Great job on the networking side.",
   },
   lessons: [
     {

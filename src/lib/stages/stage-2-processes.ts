@@ -9,10 +9,10 @@ export const stage2Processes: Stage = {
   icon: "Cpu",
   unlockedBy: "stage-1",
   narrative: {
-    intro:
-      "NovaCraft's backend runs several services — a web server, a database, and a cache. Your team lead asks you to understand how these services run as processes and communicate over the network. Time to learn how the pieces connect.",
-    context:
-      "Understand how services run as processes and communicate through network ports.",
+    character: { name: "Alex Rivera", role: "DevOps Lead", avatar: "AR", color: "cyan" },
+    intro: "Hey, Alex here — I lead the platform team. Maya told me you crushed the terminal onboarding, so I've got a real task for you. We've got a web server, a Postgres database, and a Redis cache all running on the same box. I need you to understand how these services run as processes and how they talk to each other. When something goes down at 2 AM, this knowledge is what saves you.",
+    context: "Map out how NovaCraft's services run and communicate.",
+    debrief: "Solid. You can see the pieces now — processes, ports, networking. Good foundation to build on.",
   },
   lessons: [
     {

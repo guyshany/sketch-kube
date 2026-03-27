@@ -9,10 +9,10 @@ export const stage4Orchestration: Stage = {
   icon: "Network",
   unlockedBy: "stage-3",
   narrative: {
-    intro:
-      "NovaCraft's app is getting popular! One container isn't enough anymore — you need multiple copies, automatic restarts when things crash, and a way to distribute traffic. Manual management won't scale. It's time to learn about orchestration.",
-    context:
-      "Prepare for production by understanding scaling, load balancing, and health checks.",
+    character: { name: "Alex Rivera", role: "DevOps Lead", avatar: "AR", color: "cyan" },
+    intro: "A single container per service won't cut it when traffic spikes — and the marketing team just announced a big launch event. Traffic is going to spike 10x. We need multiple copies, automatic restarts when things crash, and smart traffic distribution. Manual management is over. Time to learn what orchestration really means.",
+    context: "Prepare for the launch by understanding scaling and resilience.",
+    debrief: "You've got the orchestration concepts down. Maya's impressed — she wants you on the K8s migration team.",
   },
   lessons: [
     {

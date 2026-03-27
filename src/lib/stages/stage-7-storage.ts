@@ -9,10 +9,10 @@ export const stage7Storage: Stage = {
   icon: "Database",
   unlockedBy: "stage-6",
   narrative: {
-    intro:
-      "NovaCraft's app needs a database and some configuration: API keys, connection strings, feature flags. You can't hardcode these into containers. Kubernetes has dedicated resources for config data, secrets, and persistent storage.",
-    context:
-      "Configure the app with ConfigMaps and Secrets, and set up persistent storage.",
+    character: { name: "Jordan Kim", role: "Senior SRE", avatar: "JK", color: "violet" },
+    intro: "Now that we're live, the app is hitting a different wall. It needs database data to survive pod restarts, and we've got secrets everywhere — API keys, database passwords, feature flags. Right now some of those are hardcoded. That's a security nightmare. Kubernetes has dedicated resources for all of this. Let's set them up properly.",
+    context: "Wire up ConfigMaps, Secrets, and persistent storage.",
+    debrief: "Config and storage are locked down — the app is production-grade now. Sam from release engineering wants to talk to you next.",
   },
   lessons: [
     {

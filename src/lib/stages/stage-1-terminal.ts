@@ -9,10 +9,10 @@ export const stage1Terminal: Stage = {
   icon: "Terminal",
   unlockedBy: undefined,
   narrative: {
-    intro:
-      "Welcome to NovaCraft, a fast-growing startup that's about to scale its infrastructure. You've just joined as a DevOps engineer. Before you can deploy anything, you need to master the tool every engineer lives in: the terminal.",
-    context:
-      "Learn to navigate the command line — the foundation of all infrastructure work.",
+    character: { name: "Maya Chen", role: "CTO", avatar: "MC", color: "indigo" },
+    intro: "Hey! Welcome aboard — I'm Maya, CTO here at NovaCraft. We're growing fast and our infrastructure needs to keep up. Before anything else, I need you comfortable in the terminal. Every deployment, debug session, and automation script starts there. Get familiar with it — it's going to be your best friend.",
+    context: "Master the command line before your first deployment.",
+    debrief: "Nice work — you already look comfortable in there. I'm handing you off to Alex on the platform team. He's been looking for someone sharp.",
   },
   lessons: [
     {

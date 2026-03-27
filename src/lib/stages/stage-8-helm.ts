@@ -9,9 +9,10 @@ export const stage8Helm: Stage = {
   icon: "Package",
   unlockedBy: "stage-7",
   narrative: {
-    intro:
-      "NovaCraft now has dev, staging, and production environments. Each needs the same set of K8s resources but with different configurations. Managing all those YAML files by hand is becoming a nightmare. The team adopts Helm to package and manage deployments.",
-    context: "Package the app's K8s resources into a reusable Helm Chart.",
+    character: { name: "Sam Patel", role: "Release Engineer", avatar: "SP", color: "amber" },
+    intro: "Sam here, release engineering. Here's the problem — we're about to spin up staging and dev environments, and copy-pasting YAML files is a disaster waiting to happen. Same K8s resources, different configs — different replica counts, image tags, env vars. Someone will deploy prod secrets to dev eventually. Trust me, I've seen it happen. Helm is the answer — let me show you how to package everything into a reusable chart.",
+    context: "Package the app into a Helm chart for multi-environment deployment.",
+    debrief: "Beautiful. One chart, multiple environments, no copy-paste disasters. Maya wants to talk to you — she has a bigger vision.",
   },
   lessons: [
     {

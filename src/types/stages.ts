@@ -61,9 +61,18 @@ export interface Challenge {
   maxStars: number;
 }
 
+export interface NarrativeCharacter {
+  name: string;
+  role: string;
+  avatar: string;
+  color: string;
+}
+
 export interface StageNarrative {
+  character: NarrativeCharacter;
   intro: string;
   context: string;
+  debrief: string;
 }
 
 export interface Stage {
